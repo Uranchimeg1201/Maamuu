@@ -9,9 +9,6 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-//import Header from "../components/header";
-import Handler from "../components/handler";
-
 export default function App({ navigation }) {
   const onPressHandler = (item) => {
     navigation.push(item.navigation);
@@ -22,7 +19,7 @@ export default function App({ navigation }) {
       name: "Амьтан",
       id: "1",
       navigation: "Animal",
-      img: require("../assets/PageImage/flag.jpg"),
+      img: require("../assets/PageImage/animals.jpg"),
     },
     {
       name: "Улс",
@@ -34,22 +31,22 @@ export default function App({ navigation }) {
       name: "Өнгө",
       id: "3",
       navigation: "Color",
-      img: require("../assets/PageImage/flag.jpg"),
+      img: require("../assets/PageImage/colors.jpg"),
     },
     {
       name: "Тоо",
       id: "4",
       navigation: "Number",
-      img: require("../assets/PageImage/flag.jpg"),
+      img: require("../assets/PageImage/number.jpg"),
     },
     {
       name: "Дүрс",
       id: "5",
       navigation: "Shape",
-      img: require("../assets/PageImage/flag.jpg"),
+      img: require("../assets/PageImage/shape.jpg"),
     },
     {
-      name: "Тоглх",
+      name: "Тоглох",
       id: "6",
       navigation: "Play",
       img: require("../assets/PageImage/flag.jpg"),
@@ -96,14 +93,13 @@ const styles = StyleSheet.create({
   text: {
     flex: 1,
     marginHorizontal: 40,
-    marginTop: 50,
-    padding: 0,
+    marginTop: 20,
     // backgroundColor: "rgb(200, 255, 255 )",
     fontSize: 24,
     fontWeight: "bold",
     borderColor: "rgb(0,153,0)",
     borderWidth: 2,
-    borderStyle: "dashed",
+    borderStyle: 'dashed',
     borderRadius: 10,
     borderEndWidth: 10,
     minWidth: 120,
@@ -121,6 +117,8 @@ const styles = StyleSheet.create({
     alignContent: "center",
     alignItems: "center",
     marginLeft: 50,
-    marginTop: 20,
+    marginTop: 30,
+    borderColor: 'black',
+    borderWidth: 3,
   },
 });
