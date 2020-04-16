@@ -9,8 +9,11 @@ import {
   TouchableOpacity,
 } from "react-native";
 
+import firebase from "../config/firebase";
+
 export default function App({ navigation }) {
   const onPressHandler = (item) => {
+    const db = firebase.storage();
     navigation.push(item.navigation);
   };
 
@@ -52,6 +55,8 @@ export default function App({ navigation }) {
       img: require("../assets/PageImage/flag.jpg"),
     },
   ];
+
+
 
   return (
     <ImageBackground

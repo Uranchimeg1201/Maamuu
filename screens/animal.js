@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Icon, Image } from "react-native";
+import { StyleSheet, Text, View, Icon, Image, ImageBackground } from "react-native";
 import Swiper from "react-native-web-swiper";
 //import SoundPlayer from "react-native-sound-player";
 
@@ -11,7 +11,7 @@ class Component extends React.Component {
           alert('hi')
       play the file tone.mp3
         SoundPlayer.playSoundFile("../assets/Audio/test", 'aac')
-         or play from url
+         or play from urlnpm install --save @react-native-firebase/app
       SoundPlayer.playUrl("https://example.com/music.mp3");
       } catch (e) {
         console.log(`cannot play the sound file`, e);
@@ -20,6 +20,10 @@ class Component extends React.Component {
     };
     return (
       <View style={styles.container}>
+        <ImageBackground
+      source={require("../assets/animal/back2.jpg")}
+      resizeMode="stretch"
+      style={styles.container} >
         <Swiper>
           <View style={[styles.slideContainer, styles.slide1]}>
             <Image
@@ -114,6 +118,7 @@ class Component extends React.Component {
             <Text style={styles.bvrgedText}>Тэмээн хяруул</Text>
           </View>
         </Swiper>
+        </ImageBackground>
       </View>
     );
   }
@@ -122,48 +127,58 @@ class Component extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  
   },
   slideContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#c3f0ca",
+   
+  },
+  image1:{
+
+    height: "45%",
+    width: "65%",
+
   },
   
   image2: {
     paddingTop: 30,
-    height: "55%",
-    width: "85%",
+    height: "45%",
+    width: "65%",
   },
   image3: {
-    height: "60%",
-    width: "80%",
+    height: "40%",
+    width: "60%",
   },
   image4: {
     marginLeft: 25,
+    height: "40%",
+    width: "85%",
+
   },
   image5: {
     height: "50%",
     width: "100%",
   },
   image6: {
-    height: "60%",
-    width: "80%",
+    height: "40%",
+    width: "60%",
   },
   image7: {
     marginTop: 30,
-    height: "55%",
-    width: "70%",
+    height: "45%",
+    width: "50%",
   },
   image8: {
     marginTop: 30,
-    height: "55%",
-    width: "70%",
+    height: "45%",
+    width: "60%",
   },
   image9: {
     marginTop: 30,
-    height: "60%",
-    width: "70%",
+    height: "40%",
+    width: "50%",
   },
   image10: {
     paddingTop: 30,
@@ -172,13 +187,13 @@ const styles = StyleSheet.create({
   },
   image11: {
     paddingTop: 30,
-    height: "63%",
-    width: "72%",
+    height: "49%",
+    width: "52%",
   },
   image12: {
     paddingTop: 30,
-    height: "50%",
-    width: "90%",
+    height: "40%",
+    width: "70%",
   },
   image13: {
     
