@@ -15,14 +15,11 @@ import Swiper from "react-native-web-swiper";
 
 class Component extends React.Component {
   render() {
+
     return (
       <View style={styles.container}>
-        <ImageBackground
-          source={require("../assets/color/back.jpg")}
-          resizeMode="stretch"
-          style={styles.container}
-        >
-          <Swiper>
+        
+          
             <View style={[styles.slideContainer, styles.slide1]}>
               <TouchableHighlight
                 style={{
@@ -45,14 +42,14 @@ class Component extends React.Component {
                   height: 200,
                   width: 200,
                   borderRadius: 10,
-                  backgroundColor: "lime",
+                  backgroundColor: "green",
                   marginLeft: 50,
                   marginRight: 50,
                   marginTop: 20,
                   justifyContent: "center",
                 }}
               >
-                <Button title="Ногоон" color="black" />
+                <Button title="Ногоон" color = 'white' />
               </TouchableHighlight>
             </View>
             <View style={[styles.slideContainer, styles.slide1]}>
@@ -68,7 +65,7 @@ class Component extends React.Component {
                   justifyContent: "center",
                 }}
               >
-                <Button title="Цэнхэр" color="white" />
+                <Button title="Цэнхэр" color = 'white' />
               </TouchableHighlight>
             </View>
             <View style={[styles.slideContainer, styles.slide1]}>
@@ -84,7 +81,7 @@ class Component extends React.Component {
                   justifyContent: "center",
                 }}
               >
-                <Button title="Улаан" color="white" />
+                <Button title="Улаан" color = 'white' />
               </TouchableHighlight>
             </View>
             <View style={[styles.slideContainer, styles.slide1]}>
@@ -100,7 +97,7 @@ class Component extends React.Component {
                   justifyContent: "center",
                 }}
               >
-                <Button title="Яагаан" color="white" />
+                <Button title="Яагаан" color = 'white' />
               </TouchableHighlight>
             </View>
             <View style={[styles.slideContainer, styles.slide1]}>
@@ -115,9 +112,10 @@ class Component extends React.Component {
                   marginTop: 20,
                   justifyContent: "center",
                   borderWidth: 1,
+
                 }}
               >
-                <Button title="Цагаан" color="black" />
+                <Button title="Цагаан" color = 'black' />
               </TouchableHighlight>
             </View>
             <View style={[styles.slideContainer, styles.slide1]}>
@@ -131,9 +129,29 @@ class Component extends React.Component {
                   marginRight: 50,
                   marginTop: 20,
                   justifyContent: "center",
+                  
+                  
                 }}
               >
-                <Button title="Хар" color="white" />
+                <Button title="Хар" color = 'white' />
+              </TouchableHighlight>
+            </View>
+            <View style={[styles.slideContainer, styles.slide1]}>
+              <TouchableHighlight
+                style={{
+                  height: 200,
+                  width: 200,
+                  borderRadius: 10,
+                  backgroundColor: "black",
+                  marginLeft: 50,
+                  marginRight: 50,
+                  marginTop: 20,
+                  justifyContent: "center",
+                  
+                  
+                }}
+              >
+                <Button title="Хар" color = 'white' />
               </TouchableHighlight>
             </View>
             <View style={[styles.slideContainer, styles.slide1]}>
@@ -147,47 +165,34 @@ class Component extends React.Component {
                   marginRight: 50,
                   marginTop: 20,
                   justifyContent: "center",
+                  borderWidth: 1,
+                  
                 }}
               >
-                <Button title="Улаан хүрэн" color="white" />
+                <Button title="Бор" color = 'white' />
               </TouchableHighlight>
             </View>
+            
             <View style={[styles.slideContainer, styles.slide1]}>
               <TouchableHighlight
                 style={{
                   height: 200,
                   width: 200,
                   borderRadius: 10,
-                  backgroundColor: "rgb(153, 163, 164)",
-
+                  backgroundColor: "brown",
                   marginLeft: 50,
                   marginRight: 50,
                   marginTop: 20,
                   justifyContent: "center",
+                  borderWidth: 1,
+                  
                 }}
               >
-                <Button title="Саарал" color="white" />
+                <Button title="Бор" color = 'white' />
               </TouchableHighlight>
             </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <TouchableHighlight
-                style={{
-                  height: 200,
-                  width: 200,
-                  borderRadius: 10,
-                  backgroundColor: "orange",
-
-                  marginLeft: 50,
-                  marginRight: 50,
-                  marginTop: 20,
-                  justifyContent: "center",
-                }}
-              >
-                <Button title="Улбар шар" color="white" />
-              </TouchableHighlight>
-            </View>
-          </Swiper>
-        </ImageBackground>
+            
+       
       </View>
     );
   }
@@ -202,6 +207,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+ 
 });
 
 export default Component;

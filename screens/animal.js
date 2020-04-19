@@ -1,123 +1,125 @@
 import React from "react";
-import { StyleSheet, Text, View, Icon, Image, ImageBackground } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Icon,
+  Image,
+  ImageBackground,
+} from "react-native";
 import Swiper from "react-native-web-swiper";
-//import SoundPlayer from "react-native-sound-player";
+{
+  /*import SoundPlayer from "react-native-sound-player"*/
+}
+//import Sound from "react-native-sound";
+import { Audio, Video } from "expo-av";
+{
+  /*import {AudioRecorder, AudioUtils} from 'react-native-audio'; */
+}
 
 class Component extends React.Component {
   render() {
-    handlePlay = () => {
-      {
-        /* try {
-          alert('hi')
-      play the file tone.mp3
-        SoundPlayer.playSoundFile("../assets/Audio/test", 'aac')
-         or play from urlnpm install --save @react-native-firebase/app
-      SoundPlayer.playUrl("https://example.com/music.mp3");
-      } catch (e) {
-        console.log(`cannot play the sound file`, e);
-      } */
-      }
-    };
     return (
       <View style={styles.container}>
         <ImageBackground
-      source={require("../assets/animal/back2.jpg")}
-      resizeMode="stretch"
-      style={styles.container} >
-        <Swiper>
-          <View style={[styles.slideContainer, styles.slide1]}>
-            <Image
-              style={styles.image1}
-              source={require("../assets/animal/shar_shuwuu.png")}
-            />
-            <Text style={styles.sharText}>Шар шувуу</Text>
-          </View>
-          <View style={[styles.slideContainer, styles.slide2]}>
-            <Image
-              style={styles.image2}
-              source={require("../assets/animal/tahi.png")}
-            />
+          source={require("../assets/animal/back2.jpg")}
+          resizeMode="stretch"
+          style={styles.container}
+        >
+          <Swiper>
+            <View style={[styles.slideContainer, styles.slide1]}>
+              <Image
+                style={styles.image1}
+                source={require("../assets/animal/shar_shuwuu.png")}
+              />
+              <Text style={styles.sharText}>Шар шувуу</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide2]}>
+              <Image
+                style={styles.image2}
+                source={require("../assets/animal/tahi.png")}
+              />
 
-            <Text style={styles.anaashText}>Эрээн тахь</Text>
-          </View>
-          <View style={[styles.slideContainer, styles.slide3]}>
-            <Image
-              style={styles.image3}
-              source={require("../assets/animal/arslan.png")}
-            />
-            <Text style={styles.arslanText}>Арслан</Text>
-          </View>
-          <View style={[styles.slideContainer, styles.slide4]}>
-            <Image
-              style={styles.image4}
-              source={require("../assets/animal/bvrged.png")}
-            />
-            <Text style={styles.bvrgedText}>Бүргэд</Text>
-          </View>
-          <View style={[styles.slideContainer, styles.slide5]}>
-            <Image
-              style={styles.image5}
-              source={require("../assets/animal/bar.png")}
-            />
-            <Text style={styles.bvrgedText}>Бар</Text>
-          </View>
-          <View style={[styles.slideContainer, styles.slide6]}>
-            <Image
-              style={styles.image6}
-              source={require("../assets/animal/koala.png")}
-            />
-            <Text style={styles.bvrgedText}>Коала</Text>
-          </View>
-          <View style={[styles.slideContainer, styles.slide7]}>
-            <Image
-              style={styles.image7}
-              source={require("../assets/animal/penguin.png")}
-            />
-            <Text style={styles.bvrgedText}>Оцон шувуу</Text>
-          </View>
-          <View style={[styles.slideContainer, styles.slide8]}>
-            <Image
-              style={styles.image8}
-              source={require("../assets/animal/orca.png")}
-            />
-            <Text style={styles.bvrgedText}>Сэлэмт халим</Text>
-          </View>
-          <View style={[styles.slideContainer, styles.slide9]}>
-            <Image
-              style={styles.image9}
-              source={require("../assets/animal/toti.png")}
-            />
-            <Text style={styles.bvrgedText}>Тоть</Text>
-          </View>
-          <View style={[styles.slideContainer, styles.slide10]}>
-            <Image
-              style={styles.image10}
-              source={require("../assets/animal/anaash.png")}
-            />
-            <Text style={styles.bvrgedText}>Анааш</Text>
-          </View>
-          <View style={[styles.slideContainer, styles.slide10]}>
-            <Image
-              style={styles.image11}
-              source={require("../assets/animal/tuulai.png")}
-            />
-            <Text style={styles.bvrgedText}>Туулай</Text>
-          </View>
-          <View style={[styles.slideContainer, styles.slide11]}>
-            <Image
-              style={styles.image12}
-              source={require("../assets/animal/mogoi.png")}
-            />
-            <Text style={styles.bvrgedText}>Могой</Text>
-          </View>
-          <View style={[styles.slideContainer, styles.slide11]}>
-            <Image
-              style={styles.image13}
-              source={require("../assets/animal/ostrich.png")}
-            />
-            <Text style={styles.bvrgedText}>Тэмээн хяруул</Text>
-          </View>
-        </Swiper>
+              <Text style={styles.anaashText}>Эрээн тахь</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide3]}>
+              <Image
+                style={styles.image3}
+                source={require("../assets/animal/arslan.png")}
+              />
+              <Text style={styles.arslanText}>Арслан</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide4]}>
+              <Image
+                style={styles.image4}
+                source={require("../assets/animal/bvrged.png")}
+              />
+              <Text style={styles.bvrgedText}>Бүргэд</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide5]}>
+              <Image
+                style={styles.image5}
+                source={require("../assets/animal/bar.png")}
+              />
+              <Text style={styles.bvrgedText}>Бар</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide6]}>
+              <Image
+                style={styles.image6}
+                source={require("../assets/animal/koala.png")}
+              />
+              <Text style={styles.bvrgedText}>Коала</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide7]}>
+              <Image
+                style={styles.image7}
+                source={require("../assets/animal/penguin.png")}
+              />
+              <Text style={styles.bvrgedText}>Оцон шувуу</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide8]}>
+              <Image
+                style={styles.image8}
+                source={require("../assets/animal/orca.png")}
+              />
+              <Text style={styles.bvrgedText}>Сэлэмт халим</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide9]}>
+              <Image
+                style={styles.image9}
+                source={require("../assets/animal/toti.png")}
+              />
+              <Text style={styles.bvrgedText}>Тоть</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide10]}>
+              <Image
+                style={styles.image10}
+                source={require("../assets/animal/anaash.png")}
+              />
+              <Text style={styles.bvrgedText}>Анааш</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide10]}>
+              <Image
+                style={styles.image11}
+                source={require("../assets/animal/tuulai.png")}
+              />
+              <Text style={styles.bvrgedText}>Туулай</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide11]}>
+              <Image
+                style={styles.image12}
+                source={require("../assets/animal/mogoi.png")}
+              />
+              <Text style={styles.bvrgedText}>Могой</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide11]}>
+              <Image
+                style={styles.image13}
+                source={require("../assets/animal/ostrich.png")}
+              />
+              <Text style={styles.bvrgedText}>Тэмээн хяруул</Text>
+            </View>
+          </Swiper>
         </ImageBackground>
       </View>
     );
@@ -127,21 +129,17 @@ class Component extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-  
   },
   slideContainer: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-   
   },
-  image1:{
-
+  image1: {
     height: "45%",
     width: "65%",
-
   },
-  
+
   image2: {
     paddingTop: 30,
     height: "45%",
@@ -155,7 +153,6 @@ const styles = StyleSheet.create({
     marginLeft: 25,
     height: "40%",
     width: "85%",
-
   },
   image5: {
     height: "50%",
@@ -196,7 +193,6 @@ const styles = StyleSheet.create({
     width: "70%",
   },
   image13: {
-    
     height: 400,
     width: 327,
   },
