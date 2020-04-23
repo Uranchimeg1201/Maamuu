@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, ImageBackground } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 
 export default function Header({ navigation }) {
@@ -8,42 +8,47 @@ export default function Header({ navigation }) {
   };
 
   return (
+    
     <View style={styles.header}>
+      <ImageBackground 
+       source={require("../assets/logo/back2.png")}
+       resizeMode="stretch"
+       style={styles.container}
+     >
         {/* onPress darwal OpenMenu duudagdana */}
       <AntDesign name="bars" size={28} onPress={OpenMenu} style={styles.ikon} />
-      <View>
-        <Text style={styles.headertext}>Маамуу</Text>
+     
         <View>
           <Image
             style={styles.image}
             resource={require("../assets/logo/kids2.png")}
           />
         </View>
-      </View>
+      
+      </ImageBackground>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   header: {
-    width: "100%",
+    width: 410,
     height: "100%",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: "#D6EAF8",
   },
-  headertext: {
-    fontWeight: "bold",
-    fontSize: 20,
-    color: "#333",
-    letterSpacing: 1,
-  },
+ 
   ikon: {
-    position: "absolute",
-    left: 16,
+    position:'absolute',
+    marginLeft:-40,
   },
-  image: {
-      
-  },
+  container:{
+    height:'100%',
+    width:'70%',
+    marginRight: -30,
+    justifyContent:'center'
+  }
+
 });

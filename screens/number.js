@@ -21,11 +21,75 @@ class Component extends React.Component {
           style={styles.container}
         >
           <Swiper>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <Text style={styles.sharText}>Шар шувуу</Text>
+          <View style={[styles.slideContainer, styles.slide1]}>
+              <Image
+                style={styles.image1}
+                source={require("../assets/number/one2.png")}
+              />
+              <Text style={styles.sharText}>Нэг</Text>
             </View>
-            <View style={[styles.slideContainer, styles.slide2]}>
-              <Text style={styles.anaashText}>Эрээн тахь</Text>
+            <View style={[styles.slideContainer, styles.slide1]}>
+              <Image
+                style={styles.image1}
+                source={require("../assets/number/two.png")}
+              />
+              <Text style={styles.sharText}>Хоёр</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide1]}>
+              <Image
+                style={styles.image1}
+                source={require("../assets/number/three.png")}
+              />
+              <Text style={styles.sharText}>Гурав</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide1]}>
+              <Image
+                style={styles.image1}
+                source={require("../assets/number/four.png")}
+              />
+              <Text style={styles.sharText}>Дөрөв</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide1]}>
+              <Image
+                style={styles.image1}
+                source={require("../assets/number/five.png")}
+              />
+              <Text style={styles.sharText}>Тав</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide1]}>
+              <Image
+                style={styles.image1}
+                source={require("../assets/number/six.png")}
+              />
+              <Text style={styles.sharText}>Зургаа</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide1]}>
+              <Image
+                style={styles.image1}
+                source={require("../assets/number/seven.png")}
+              />
+              <Text style={styles.sharText}>Долоо</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide1]}>
+              <Image
+                style={styles.image1}
+                source={require("../assets/number/eight.png")}
+              />
+              <Text style={styles.sharText}>Найм</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide1]}>
+              <Image
+                style={styles.image1}
+                source={require("../assets/number/nine.png")}
+              />
+              <Text style={styles.sharText}>Ес</Text>
+            </View>
+            <View style={[styles.slideContainer, styles.slide1]}>
+              <Image
+                style={styles.image1}
+                source={require("../assets/number/ten.png")}
+              />
+              <Text style={styles.sharText}>Арав</Text>
             </View>
           </Swiper>
         </ImageBackground>
@@ -47,12 +111,13 @@ const styles = StyleSheet.create({
   sharText: {
     fontSize: 24,
     fontWeight: "bold",
-  },
-  anaashText: {
-    paddingTop: 100,
-    fontSize: 24,
-    fontWeight: "bold",
-  },
+    marginTop: 50,
+  }, 
+  image1:{
+    marginTop: 100,
+    width:'30%',
+    height:'30%',
+  }
 });
 
 export default Component;

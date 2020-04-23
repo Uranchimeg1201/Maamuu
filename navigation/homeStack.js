@@ -7,6 +7,10 @@ import Shape from "../screens/shape";
 import Number from "../screens/number";
 import Play from "../screens/play";
 import Header from "../components/header";
+import Login from "../screens/login";;
+import Sign from "../screens/SignUp";
+import Password from "../screens/ForgotPassword";
+
 import React from "react";
 const screens = {
   Home: {
@@ -36,14 +40,23 @@ const screens = {
   },
   Play: {
     screen: Play,
-  }
+  },
+  Login:{
+    screen: Login,
+  },
+  SignUp:{
+    screen:Sign,
+  },
+  Password:{
+    screen:Password,
+  },
  
  
 };
 
 const HomeStack = createStackNavigator(screens, {
   defaultNavigationOptions: {
-    headerStyle: { backgroundColor: "rgb(200,255, 255)", height: 60 },
+    headerStyle: { backgroundColor: "white", height: 60 },
   },
 });
 
