@@ -1,213 +1,83 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
   View,
-  Icon,
-  Image,
+  FlatList,
   ImageBackground,
-  Button,
-  Card,
-  TouchableHighlight,
 } from "react-native";
-import Swiper from "react-native-web-swiper";
-//import SoundPlayer from "react-native-sound-player";
 
-class Component extends React.Component {
-  render() {
+import Navigator from '../navigation/drawer';
+import * as firebase from 'firebase';
+import ApiKeys, { firebaseConfig } from '../config/ApiKeys.demo';
 
-    return (
-      <View style={styles.container}>
-        
-          
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <TouchableHighlight
-                style={{
-                  height: 200,
-                  width: 200,
-                  borderRadius: 10,
-                  backgroundColor: "yellow",
-                  marginLeft: 50,
-                  marginRight: 50,
-                  marginTop: 20,
-                  justifyContent: "center",
-                }}
-              >
-                <Button title="Шар" />
-              </TouchableHighlight>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <TouchableHighlight
-                style={{
-                  height: 200,
-                  width: 200,
-                  borderRadius: 10,
-                  backgroundColor: "green",
-                  marginLeft: 50,
-                  marginRight: 50,
-                  marginTop: 20,
-                  justifyContent: "center",
-                }}
-              >
-                <Button title="Ногоон" color = 'white' />
-              </TouchableHighlight>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <TouchableHighlight
-                style={{
-                  height: 200,
-                  width: 200,
-                  borderRadius: 10,
-                  backgroundColor: "blue",
-                  marginLeft: 50,
-                  marginRight: 50,
-                  marginTop: 20,
-                  justifyContent: "center",
-                }}
-              >
-                <Button title="Цэнхэр" color = 'white' />
-              </TouchableHighlight>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <TouchableHighlight
-                style={{
-                  height: 200,
-                  width: 200,
-                  borderRadius: 10,
-                  backgroundColor: "red",
-                  marginLeft: 50,
-                  marginRight: 50,
-                  marginTop: 20,
-                  justifyContent: "center",
-                }}
-              >
-                <Button title="Улаан" color = 'white' />
-              </TouchableHighlight>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <TouchableHighlight
-                style={{
-                  height: 200,
-                  width: 200,
-                  borderRadius: 10,
-                  backgroundColor: "pink",
-                  marginLeft: 50,
-                  marginRight: 50,
-                  marginTop: 20,
-                  justifyContent: "center",
-                }}
-              >
-                <Button title="Яагаан" color = 'white' />
-              </TouchableHighlight>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <TouchableHighlight
-                style={{
-                  height: 200,
-                  width: 200,
-                  borderRadius: 10,
-                  backgroundColor: "white",
-                  marginLeft: 50,
-                  marginRight: 50,
-                  marginTop: 20,
-                  justifyContent: "center",
-                  borderWidth: 1,
 
-                }}
-              >
-                <Button title="Цагаан" color = 'black' />
-              </TouchableHighlight>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <TouchableHighlight
-                style={{
-                  height: 200,
-                  width: 200,
-                  borderRadius: 10,
-                  backgroundColor: "black",
-                  marginLeft: 50,
-                  marginRight: 50,
-                  marginTop: 20,
-                  justifyContent: "center",
-                  
-                  
-                }}
-              >
-                <Button title="Хар" color = 'white' />
-              </TouchableHighlight>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <TouchableHighlight
-                style={{
-                  height: 200,
-                  width: 200,
-                  borderRadius: 10,
-                  backgroundColor: "black",
-                  marginLeft: 50,
-                  marginRight: 50,
-                  marginTop: 20,
-                  justifyContent: "center",
-                  
-                  
-                }}
-              >
-                <Button title="Хар" color = 'white' />
-              </TouchableHighlight>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <TouchableHighlight
-                style={{
-                  height: 200,
-                  width: 200,
-                  borderRadius: 10,
-                  backgroundColor: "brown",
-                  marginLeft: 50,
-                  marginRight: 50,
-                  marginTop: 20,
-                  justifyContent: "center",
-                  borderWidth: 1,
-                  
-                }}
-              >
-                <Button title="Бор" color = 'white' />
-              </TouchableHighlight>
-            </View>
-            
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <TouchableHighlight
-                style={{
-                  height: 200,
-                  width: 200,
-                  borderRadius: 10,
-                  backgroundColor: "brown",
-                  marginLeft: 50,
-                  marginRight: 50,
-                  marginTop: 20,
-                  justifyContent: "center",
-                  borderWidth: 1,
-                  
-                }}
-              >
-                <Button title="Бор" color = 'white' />
-              </TouchableHighlight>
-            </View>
-            
-       
-      </View>
-    );
+
+export default class  App extends React.Component {
+  constructor(props){
+    super(props);
+    this.state ={
+      isAuthenticationReady: false,
+      isAuthenticated: false,
+    };
+  
+  // initialize firebase ...
+  // Initialize firebase...
+  if (!firebase.apps.length) { firebase.initializeApp(ApiKeys.FirebaseConfig); }
+  firebase.auth().onAuthStateChanged(this.onAuthStateChanged);
+
+  } 
+  onAuthStateChanged = (user) =>{
+    this.setState({isAuthenticationReady: true});
+    this.setState({isAuthenticated: !!user});
+  }
+  
+  render() {return(
+
+    <Navigator/>
+
+  );
   }
 }
+  
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  slideContainer: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
- 
-});
 
-export default Component;
+
+
+// tusdaa
+
+componentDidMount(){
+  this.checkIfLogged();
+}
+checkIfLogged = () => {
+  firebase.auth().onAuthStateChanged(function(user)
+  {
+    if(user)
+    {
+      this.props.navigation.navigate("Home");
+    }
+    else{
+      this.props.navigation.navigate("Login");
+    }
+  }.bind(this)
+  );
+};
+
+//apiConfig
+
+
+
+{
+  /*export const firebaseConfig ={
+  apiKey: "AIzaSyBKzPqmh1ZpOGpi9WZKK2j3bwZu990KdQU",
+  authDomain: "maamuu-78a10.firebaseapp.com",
+  databaseURL: "https://maamuu-78a10.firebaseio.com",
+  projectId: "maamuu-78a10",
+  storageBucket: "maamuu-78a10.appspot.com",
+  messagingSenderId: "221543229523",
+  appId: "1:221543229523:web:8fa5d02a29ba6263ab7ea6",
+  measurementId: "G-BQ06XGTLLF"
+
+}
+*/
+}

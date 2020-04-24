@@ -9,7 +9,8 @@ import {
 
 import Navigator from '../navigation/drawer';
 import * as firebase from 'firebase';
-import ApiKeys from '../config/ApiKeys.demo';
+import ApiKeys, { firebaseConfig } from '../config/ApiKeys.demo';
+//firebase.initializeApp(firebaseConfig);
 
 
 export default class  App extends React.Component {
@@ -23,7 +24,7 @@ export default class  App extends React.Component {
   // initialize firebase ...
   // Initialize firebase...
   if (!firebase.apps.length) { firebase.initializeApp(ApiKeys.FirebaseConfig); }
-  firebase.auth().onAuthStateChanged(this.onAuthStateChanged);
+
 
   } 
   onAuthStateChanged = (user) =>{
