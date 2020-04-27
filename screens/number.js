@@ -7,8 +7,9 @@ import {
   Image,
   ImageBackground,
 } from "react-native";
-import * as fabfirebaseapp from 'firebase'; 
+import * as fabfirebaseapp from "firebase";
 import Swiper from "react-native-web-swiper";
+import * as Speech from "expo-speech";
 //import SoundPlayer from "react-native-sound-player";
 
 class Component extends React.Component {
@@ -21,7 +22,7 @@ class Component extends React.Component {
           style={styles.container}
         >
           <Swiper>
-          <View style={[styles.slideContainer, styles.slide1]}>
+            <View style={[styles.slideContainer, styles.slide1]}>
               <Image
                 style={styles.image1}
                 source={require("../assets/number/one2.png")}
@@ -112,12 +113,12 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginTop: 50,
-  }, 
-  image1:{
+  },
+  image1: {
     marginTop: 100,
-    width:'30%',
-    height:'30%',
-  }
+    width: "30%",
+    height: "30%",
+  },
 });
 
 export default Component;

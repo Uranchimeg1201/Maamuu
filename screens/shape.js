@@ -6,12 +6,41 @@ import {
   Icon,
   Image,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
-import * as fabfirebaseapp from 'firebase'; 
+import * as fabfirebaseapp from "firebase";
 import Swiper from "react-native-web-swiper";
+import { Audio } from "expo-av";
+
 //import SoundPlayer from "react-native-sound-player";
 
+const xyloSounds = {
+  one: require("../assets/Audio/test.aac"),
+};
+
 class Component extends React.Component {
+  handlePlaySound = async (note) => {
+    const soundObject = new Audio.Sound();
+
+    try {
+      let source = xyloSounds[note];
+      // let source = require('./assets/note1.wav')
+      await soundObject.loadAsync(source);
+      await soundObject
+        .playAsync()
+        .then(async (playbackStatus) => {
+          setTimeout(() => {
+            soundObject.unloadAsync();
+          }, playbackStatus.playableDurationMillis);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -21,19 +50,23 @@ class Component extends React.Component {
           style={styles.container}
         >
           <Swiper>
-          <View style={[styles.slideContainer, styles.slide1]}>
+            <View style={[styles.slideContainer, styles.slide1]}>
               <Image
                 style={styles.image1}
                 source={require("../assets/shape/circle.png")}
               />
-              <Text style={styles.sharText}>Дугуй</Text>
+              <TouchableOpacity onPress={() => this.handlePlaySound("one")}>
+                <Text style={styles.sharText}>Дугуй</Text>
+              </TouchableOpacity>
             </View>
             <View style={[styles.slideContainer, styles.slide1]}>
-              <Image
-                style={styles.image1}
-                source={require("../assets/shape/cross.png")}
-              />
-              <Text style={styles.sharText}>Хоёр</Text>
+              <TouchableOpacity>
+                <Image
+                  style={styles.image1}
+                  source={require("../assets/shape/cross.png")}
+                />
+                <Text style={styles.sharText}>Хоёр</Text>
+              </TouchableOpacity>
             </View>
             <View style={[styles.slideContainer, styles.slide1]}>
               <Image
@@ -77,7 +110,6 @@ class Component extends React.Component {
               />
               <Text style={styles.sharText}>Таван хошуу</Text>
             </View>
-            
           </Swiper>
         </ImageBackground>
       </View>
@@ -99,31 +131,27 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     marginTop: 50,
-  }, 
-  image1:{
-    marginTop: 100,
-    width:'55%',
-    height:'35%',
   },
-  image2:{
+  image1: {
     marginTop: 100,
-    width:'60%',
-    height:'20%'
+    width: 200,
+    height: 200,
   },
-  image3:{
+  image2: {
     marginTop: 100,
-    width:'60%',
-    height:'36%',
+    width: "60%",
+    height: "20%",
   },
-  image4:{
+  image3: {
     marginTop: 100,
-    width:'60%',
-    height:'20%'
+    width: "60%",
+    height: "36%",
   },
-  
-
-  
-
+  image4: {
+    marginTop: 100,
+    width: "60%",
+    height: "20%",
+  },
 });
 
 export default Component;

@@ -1,9 +1,40 @@
 import React from "react";
-import { StyleSheet, Text, View, Image, ImageBackground } from "react-native";
+import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity} from "react-native";
 import Swiper from "react-native-web-swiper";
+import {Audio} from 'expo-av';
+const xyloSounds = {
+  one: require("../assets/Audio/test.aac"),
+  two: require("../assets/Audio/test.aac"),
+  three: require("../assets/Audio/test.aac"),
+  four: require("../assets/Audio/test.aac"),
+  five: require("../assets/Audio/test.aac"),
+  six: require("../assets/Audio/test.aac"),
+  seven: require("../assets/Audio/test.aac"),
+};
 
-export default function Animal() {
-  return (
+ class Animal extends React.Component {
+  PlaySound = async (note) => {
+    const soundObject = new Audio.Sound();
+
+    try {
+      let source = xyloSounds[note];
+      // let source = require('./assets/note1.wav')
+      await soundObject.loadAsync(source);
+      await soundObject
+        .playAsync()
+        .then(async (playbackStatus) => {
+          setTimeout(() => {
+            soundObject.unloadAsync();
+          }, playbackStatus.playableDurationMillis);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  render() { return (
     <View style={styles.container}>
       <ImageBackground
         source={require("../assets/flag/back2.jpg")}
@@ -16,8 +47,10 @@ export default function Animal() {
               style={styles.image1}
               source={require("../assets/flag/mongolia.png")}
             />
+            <TouchableOpacity onPress={() => this.PlaySound("one")}>
             <Text style={styles.mongolText}>Улс: Монгол</Text>
             <Text style={styles.UbText}>Нийслэл хот : Улаанбаатар</Text>
+            </TouchableOpacity>
           </View>
           <View style={[styles.slideContainer, styles.slide1]}>
             <Image
@@ -185,6 +218,7 @@ export default function Animal() {
     </View>
   );
 }
+ }
 
 const styles = StyleSheet.create({
   container: {
@@ -231,3 +265,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+export default Animal;

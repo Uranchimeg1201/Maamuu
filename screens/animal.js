@@ -6,18 +6,44 @@ import {
   Icon,
   Image,
   ImageBackground,
+  TouchableOpacity,
 } from "react-native";
 import Swiper from "react-native-web-swiper";
-{
-  /*import SoundPlayer from "react-native-sound-player"*/
-}
-//import Sound from "react-native-sound";
+
 import { Audio, Video } from "expo-av";
-{
-  /*import {AudioRecorder, AudioUtils} from 'react-native-audio'; */
-}
+const xyloSounds = {
+  one: require("../assets/Audio/test.aac"),
+  two: require("../assets/Audio/test.aac"),
+  three: require("../assets/Audio/test.aac"),
+  four: require("../assets/Audio/test.aac"),
+  five: require("../assets/Audio/test.aac"),
+  six: require("../assets/Audio/test.aac"),
+  seven: require("../assets/Audio/test.aac"),
+};
 
 class Component extends React.Component {
+  handlePlaySound = async (note) => {
+    const soundObject = new Audio.Sound();
+
+    try {
+      let source = xyloSounds[note];
+      // let source = require('./assets/note1.wav')
+      await soundObject.loadAsync(source);
+      await soundObject
+        .playAsync()
+        .then(async (playbackStatus) => {
+          setTimeout(() => {
+            soundObject.unloadAsync();
+          }, playbackStatus.playableDurationMillis);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   render() {
     return (
       <View style={styles.container}>
@@ -32,7 +58,9 @@ class Component extends React.Component {
                 style={styles.image1}
                 source={require("../assets/animal/shar_shuwuu.png")}
               />
-              <Text style={styles.sharText}>Шар шувуу</Text>
+              <TouchableOpacity onPress={() => this.handlePlaySound("one")}>
+                <Text style={styles.sharText}>Шар шувуу</Text>
+              </TouchableOpacity>
             </View>
             <View style={[styles.slideContainer, styles.slide2]}>
               <Image

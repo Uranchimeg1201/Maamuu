@@ -10,6 +10,7 @@ import Header from "../components/header";
 import Login from "../screens/login";;
 import Sign from "../screens/SignUp";
 import Password from "../screens/ForgotPassword";
+import Video from '../screens/video';
 
 import React from "react";
 const screens = {
@@ -49,6 +50,9 @@ const screens = {
   },
   Password:{
     screen:Password,
+  },
+  Video:{
+    screen:Video,
   },
  
  
