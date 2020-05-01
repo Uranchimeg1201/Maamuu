@@ -7,10 +7,13 @@ import Shape from "../screens/shape";
 import Number from "../screens/number";
 import Play from "../screens/play";
 import Header from "../components/header";
-import Login from "../screens/login";;
+import Login from "../screens/login";
 import Sign from "../screens/SignUp";
 import Password from "../screens/ForgotPassword";
-import Video from '../screens/video';
+import Video from "../screens/video";
+import animalGame from "../screens/animalGame";
+import numberGame from "../screens/numberGame";
+//import flagGame from '../components/flagGame';
 
 import React from "react";
 const screens = {
@@ -33,7 +36,7 @@ const screens = {
   Flag: {
     screen: Flag,
   },
-  Number:{
+  Number: {
     screen: Number,
   },
   Shape: {
@@ -42,20 +45,25 @@ const screens = {
   Play: {
     screen: Play,
   },
-  Login:{
+  Login: {
     screen: Login,
   },
-  SignUp:{
-    screen:Sign,
+  SignUp: {
+    screen: Sign,
   },
-  Password:{
-    screen:Password,
+  Password: {
+    screen: Password,
   },
-  Video:{
-    screen:Video,
+  Video: {
+    screen: Video,
   },
- 
- 
+  numberGame: {
+    screen: numberGame,
+  },
+
+  animalGame: {
+    screen: animalGame,
+  },
 };
 
 const HomeStack = createStackNavigator(screens, {

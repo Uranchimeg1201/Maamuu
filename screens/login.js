@@ -15,6 +15,7 @@ import {
 import { NavigationActions } from "react-navigation";
 import { Entypo } from "@expo/vector-icons";
 import * as firebase from "firebase";
+import * as Google from "expo-google-app-auth";
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -52,26 +53,92 @@ export default class Login extends React.Component {
         }
       );
   };
+  isUserEqual = (googleUser, firebaseUser) => {
+    if (firebaseUser) {
+      var providerData = firebaseUser.providerData;
+      for (var i = 0; i < providerData.length; i++) {
+        if (
+          providerData[i].providerId ===
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID &&
+          providerData[i].uid === googleUser.getBasicProfile().getId()
+        ) {
+          // We don't need to reauth the Firebase connection.
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+  onSignIn = (googleUser) => {
+    console.log("Google Auth Response", googleUser);
+    // We need to register an Observer on Firebase Auth to make sure auth is initialized.
+    var unsubscribe = firebase
+      .auth()
+      .onAuthStateChanged(function (firebaseUser) {
+        unsubscribe();
+        // Check if we are already signed-in Firebase with the correct user.
+        if (!this.isUserEqual(googleUser, firebaseUser)) {
+          // Build Firebase credential with the Google ID token.
+          var credential = firebase.auth.GoogleAuthProvider.credential(
+            googleUser.idToken,
+            googleUser.accessToken
+          );
+          // Sign in with credential from the Google user.
+          firebase
+            .auth()
+            .signInWithCredential(credential)
+            .then(function(result){
+              console.log('signed in');
+             firebase
+              .database()
+              .ref('/users/' + result.user.uid)
+              .set({
+                gmail:result.user.gmail,
+                profile_picture: result.additionalUserInfo.profile.picture,
+                local: result.additionalUserInfo.profile.local,
+                first_name: result.additionalUserInfo.profile.given_name,
+                last_name : result.additionalUserInfo.profile.family_name
+              })
+              .then(function(snapshot){
+                // console.log('Aldaa');
+              })
+            })
+            .catch(function (error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              // The email of the user's account used.
+              var email = error.email;
+              // The firebase.auth.AuthCredential type that was used.
+              var credential = error.credential;
+              // ...
+            });
+        } else {
+          console.log("User already signed-in Firebase.");
+        }
+      }.bind(this));
+  };
   signInWithGoogleAsync = async () => {
     try {
       const result = await Google.logInAsync({
-        ///androidClientId: YOUR_CLIENT_ID_HERE,
         behavior: "web",
         iosClientId:
-          " 221543229523-8124ldj7vej397kun4e3360ot3tlr34j.apps.googleusercontent.com",
+          "221543229523-8124ldj7vej397kun4e3360ot3tlr34j.apps.googleusercontent.com",
+         
+          
         scopes: ["profile", "email"],
       });
 
       if (result.type === "success") {
+        this.onSignIn(result);
         return result.accessToken;
-      } else {
+      } else {  
         return { cancelled: true };
       }
     } catch (e) {
       return { error: true };
     }
   };
-
   render() {
     return (
       <View style={styles.container}>
@@ -93,7 +160,7 @@ export default class Login extends React.Component {
             placeholderTextColor="green"
             onChangeText={(text) => this.setState({ email: text })}
           />
-        
+
           <TextInput
             style={styles.TextInputPass}
             value={this.state.password}
@@ -108,8 +175,8 @@ export default class Login extends React.Component {
                 width: 100,
                 borderRadius: 10,
                 backgroundColor: "#2ECC71",
-                borderColor:'green',
-                borderWidth:2,
+                borderColor: "green",
+                borderWidth: 2,
                 marginTop: 20,
                 justifyContent: "center",
               }}
@@ -123,8 +190,8 @@ export default class Login extends React.Component {
                 width: 110,
                 borderRadius: 10,
                 backgroundColor: "#2ECC71",
-                borderColor:'green',
-                borderWidth:2,
+                borderColor: "green",
+                borderWidth: 2,
                 marginLeft: 10,
                 marginTop: 20,
                 justifyContent: "center",
@@ -156,7 +223,7 @@ export default class Login extends React.Component {
             <Button
               title="Google"
               color="black"
-              onPress={() => this.signInWithGoogleAsync()}
+              onPress={this.signInWithGoogleAsync}
             />
           </TouchableHighlight>
         </ImageBackground>
@@ -207,5 +274,4 @@ const styles = StyleSheet.create({
     fontSize: 42,
     color: "#7558D6",
   },
-
 });
