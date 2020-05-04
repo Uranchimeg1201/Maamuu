@@ -28,7 +28,11 @@ class Game extends React.Component {
    
   };
   Animal = () =>{
-    this.props.navigation.navigate('animalGame')
+    this.props.navigation.navigate('animalGame');
+  }
+  Listen = () =>{
+    console.log('listen');
+    this.props.navigation.navigate('listenGame');
   }
   render() {
     return (
@@ -86,7 +90,8 @@ class Game extends React.Component {
               justifyContent: "center",
             }}
           >
-            <Button title="Сонсоод сонгоорой"/>
+            <Button title="Сонсоод сонгоорой"
+            onPress={this.Listen}/>
           </TouchableHighlight>
         </ImageBackground>
       </View>

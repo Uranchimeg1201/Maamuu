@@ -13,6 +13,8 @@ import Password from "../screens/ForgotPassword";
 import Video from "../screens/video";
 import animalGame from "../screens/animalGame";
 import numberGame from "../screens/numberGame";
+import listenGame from "../screens/listenGame";
+import rest from "../screens/rest";
 //import flagGame from '../components/flagGame';
 
 import React from "react";
@@ -64,6 +66,12 @@ const screens = {
   animalGame: {
     screen: animalGame,
   },
+  listenGame:{
+    screen: listenGame,
+  },
+  rest:{
+    screen: rest,
+  }
 };
 
 const HomeStack = createStackNavigator(screens, {

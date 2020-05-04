@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -12,6 +12,14 @@ import {
 import firebase from "../config/firebase";
 
 export default function App({ navigation }) {
+
+  useEffect(()=>{
+    setTimeout(()=>{
+      console.log('rest')
+      navigation.push('rest')
+    }, 5000)
+  }, []);
+
   const onPressHandler = (item) => {
     const db = firebase.storage();
     navigation.push(item.navigation);
