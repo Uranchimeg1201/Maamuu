@@ -26,6 +26,23 @@ export default class Login extends React.Component {
     };
   }
 
+  //  componentDidMount() {
+  //    this.checkIfLoggedIn();
+  //  }
+
+  // checkIfLoggedIn = () => {
+  //   firebase.auth().onAuthStateChanged(
+  //     function (user) {
+  //       console.log("aldaa");
+  //       if (user) {
+  //         this.props.navigation.navigate("Admin");
+  //       } else {
+  //         this.props.navigation.navigate("Video");
+  //       }
+  //     }
+  //   );
+  // };
+
   onPressSign = () => {
     {
       /* var navActions =NavigationActions.reset({
@@ -46,7 +63,7 @@ export default class Login extends React.Component {
       .signInWithEmailAndPassword(this.state.email, this.state.password)
       .then(
         () => {
-          this.props.navigation.navigate("Video");
+          this.props.navigation.navigate("admin");
         },
         (error) => {
           Alert.alert(error.message);
@@ -72,9 +89,8 @@ export default class Login extends React.Component {
   onSignIn = (googleUser) => {
     console.log("Google Auth Response", googleUser);
     // We need to register an Observer on Firebase Auth to make sure auth is initialized.
-    var unsubscribe = firebase
-      .auth()
-      .onAuthStateChanged(function (firebaseUser) {
+    var unsubscribe = firebase.auth().onAuthStateChanged(
+      function (firebaseUser) {
         unsubscribe();
         // Check if we are already signed-in Firebase with the correct user.
         if (!this.isUserEqual(googleUser, firebaseUser)) {
@@ -86,22 +102,32 @@ export default class Login extends React.Component {
           // Sign in with credential from the Google user.
           firebase
             .auth()
-            .signInWithCredential(credential)
-            .then(function(result){
-              console.log('signed in');
-             firebase
-              .database()
-              .ref('/users/' + result.user.uid)
-              .set({
-                gmail:result.user.gmail,
-                profile_picture: result.additionalUserInfo.profile.picture,
-                local: result.additionalUserInfo.profile.local,
-                first_name: result.additionalUserInfo.profile.given_name,
-                last_name : result.additionalUserInfo.profile.family_name
-              })
-              .then(function(snapshot){
-                // console.log('Aldaa');
-              })
+            .signInAndRetrieveDataWithCredential(credential)
+            .then(function (result) {
+              //console.log("signed in");
+              if (result.additionalUserInfo.isNewUser) {
+                firebase
+                  .database()
+                  .ref("/users/" + result.user.uid)
+                  .set({
+                    gmail: result.user.gmail,
+                    profile_picture: result.additionalUserInfo.profile.picture,
+                    local: result.additionalUserInfo.profile.locale,
+                    first_name: result.additionalUserInfo.profile.given_name,
+                    last_name: result.additionalUserInfo.profile.family_name,
+                    created_at: Date.now(),
+                  })
+                  .then(function (snapshot) {
+                    // console.log('Aldaa');
+                  });
+              } else {
+                firebase
+                  .database()
+                  .ref("/users/" + result.user.uid)
+                  .update({
+                    last_logged_in: Date.now(),
+                  });
+              }
             })
             .catch(function (error) {
               // Handle Errors here.
@@ -116,23 +142,23 @@ export default class Login extends React.Component {
         } else {
           console.log("User already signed-in Firebase.");
         }
-      }.bind(this));
+      }
+    );
   };
   signInWithGoogleAsync = async () => {
     try {
       const result = await Google.logInAsync({
         behavior: "web",
         iosClientId:
-          "221543229523-8124ldj7vej397kun4e3360ot3tlr34j.apps.googleusercontent.com",
-         
-          
+          "221543229523-tdhlppglc83pkfsgeflro0lk7unhn115.apps.googleusercontent.com",
+
         scopes: ["profile", "email"],
       });
 
       if (result.type === "success") {
         this.onSignIn(result);
         return result.accessToken;
-      } else {  
+      } else {
         return { cancelled: true };
       }
     } catch (e) {

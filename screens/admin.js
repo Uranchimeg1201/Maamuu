@@ -1,111 +1,48 @@
 import React from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  Image,
-  ImageBackground,
-  Button,
-  TouchableHighlight,
-  FlatList,
-  TextInput,
-} from "react-native";
+import { Text, Image, View, Button, StyleSheet, Alert } from "react-native";
+import * as ImagePicker from "expo-image-picker";
+import * as Permissions from 'expo-permissions';  
 import * as firebase from "firebase";
 
-const rootQuestions = firebase.database().ref();
-const questionsRef = rootQuestions.child("questions");
+export default class Admin extends React.Component {
+  state = {
+    image: null,
+    uploading: false,
+  };
 
-export default class Admin extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      question1: [],
-      newQuestions: "",
-      loading: false,
-    };
+  async componentDidMount() {
+    await Permissions.askAsync(Permissions.CAMERA_ROLL);
+    await Permissions.askAsync(Permissions.CAMERA);
   }
+  onChooseImagePress = async () => {
+    //let result = await ImagePicker.launchCameraAsync();
+    let result = await ImagePicker.launchImageLibraryAsync();
 
-  componentDidMount() {
-    questionsRef.on("value", (childSnapShot) => {
-      const question1 = [];
-      childSnapshot.forEach((doc) => {
-        question1.push({
-          key: doc.key,
-          questions: doc.toJSON().questions,
+    if (!result.cancelled) {
+      this.uploadImage(result.uri, "penguin" + new Date().getTime())
+     
+        .then(() => {
+          Alert.alert("Амжилттай бүртгэгдлээ");
+        })
+        .catch((error) => {
+          Alert.alert(error);
         });
-        this.setState({
-          question1: question1,
-          loading: false,
-        });
-      });
-    });
-  }
-  onPressAdd = () => {
-    if (this.state.newQuestions.trim() === "") {
-      alert("Асуулт хоосон байна");
-      return;
     }
-    questionsRef.push({
-      question: this.state.newQuestions,
-    });
+  };
+  uploadImage = async (uri, imageName) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+
+    var ref = firebase
+      .storage()
+      .ref()
+      .child("newImage/" + imageName);
+    return ref.put(blob);
   };
   render() {
     return (
       <View style={styles.container}>
-        <View>
-          <TextInput
-            style={{
-              height: 40,
-              width: 200,
-              margin: 10,
-              padding: 10,
-              borderColor: "black",
-              borderWidth: 1,
-              color: black,
-            }}
-            keyboardType="default"
-            placeholderTextColor="black"
-            placeholder="Асуулт нэмэх"
-            autoCapitalize="none"
-            onChangeText={(text) => {
-              this.setState({ newQuestions: text });
-            }}
-            value={this.state.newQuestions}
-          />
-          <TouchableHighlight
-            style={{
-              marginRight: 10,
-            }}
-            underlayColor="tomato"
-            onPress={this.onPressAdd}
-          >
-            <Image
-              style={{
-                width: 35,
-                height: 35,
-              }}
-              source={require("")}
-            />
-          </TouchableHighlight>
-        </View>
-
-        <FlatList
-          data={this.state.question}
-          renderItem={({ item, index }) => {
-            return (
-              <Text
-                style={{
-                  fontSize: 20,
-                  fontWeight: "bold",
-                  margin: 10,
-                }}
-              >
-                {" "}
-                {item.questions}
-              </Text>
-            );
-          }}
-        ></FlatList>
+        <Button title="Зураг оруулах" onPress={this.onChooseImagePress} />
       </View>
     );
   }
@@ -114,5 +51,7 @@ export default class Admin extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignContent: "center",
+    alignItems: "center",
   },
 });

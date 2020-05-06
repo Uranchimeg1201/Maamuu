@@ -15,6 +15,7 @@ import animalGame from "../screens/animalGame";
 import numberGame from "../screens/numberGame";
 import listenGame from "../screens/listenGame";
 import rest from "../screens/rest";
+import admin from "../screens/admin";
 //import flagGame from '../components/flagGame';
 
 import React from "react";
@@ -71,6 +72,9 @@ const screens = {
   },
   rest:{
     screen: rest,
+  },
+  admin:{
+    screen: admin,
   }
 };
 

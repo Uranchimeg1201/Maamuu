@@ -16,8 +16,10 @@
     "expo": "^37.0.6",
     "expo-av": "~8.1.0",
     "expo-google-app-auth": "^8.1.0",
+    "expo-random": "~8.1.0",
     "expo-speech": "~8.1.0",
     "firebase": "^7.14.0",
+    "firebase-admin": "^8.11.0",
     "native-base": "^2.13.12",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
@@ -34,9 +36,11 @@
     "react-native-track-player": "^1.2.2",
     "react-native-web": "~0.11.7",
     "react-native-web-swiper": "^2.1.0",
-    "react-navigation": "^4.3.7",
+    "react-navigation": "^4.3.9",
     "react-navigation-drawer": "^2.4.11",
-    "react-navigation-stack": "^2.3.11"
+    "react-navigation-stack": "^2.3.11",
+    "expo-image-picker": "~8.1.0",
+    "expo-permissions": "~8.1.0"
   },
   "devDependencies": {
     "babel-preset-expo": "~8.1.0",
