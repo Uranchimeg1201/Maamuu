@@ -12,9 +12,13 @@ import {
 import * as ImagePicker from "expo-image-picker";
 import * as Permissions from "expo-permissions";
 import * as firebase from "firebase";
+import { NavigationEvents } from "react-navigation";
 
 export default class Admin extends React.Component {
 
+  constructor(props) {
+    super(props);
+  }
 
   async componentDidMount() {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -22,6 +26,9 @@ export default class Admin extends React.Component {
   }
   onDeleteImagePress = async () =>{
 
+  }
+  addNewQuestions = () =>{
+    this.props.navigation.navigate("addNewQuestions");
   }
   onChooseImagePress = async () => {
     //let result = await ImagePicker.launchCameraAsync();
@@ -89,7 +96,7 @@ export default class Admin extends React.Component {
               <Button
                 title="Асуулт оруулах"
                 color="white"
-                onPress={this.onChooseImagePress}
+                onPress={this.addNewQuestions}
               />
             </TouchableHighlight>
             <TouchableHighlight

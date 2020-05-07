@@ -16,6 +16,7 @@ import numberGame from "../screens/numberGame";
 import listenGame from "../screens/listenGame";
 import rest from "../screens/rest";
 import admin from "../screens/admin";
+import addNewQuestions from "../components/addNewQuestions";
 //import flagGame from '../components/flagGame';
 
 import React from "react";
@@ -75,7 +76,10 @@ const screens = {
   },
   admin:{
     screen: admin,
-  }
+  },
+  addNewQuestions:{
+    screen: addNewQuestions,
+  },
 };
 
 const HomeStack = createStackNavigator(screens, {
