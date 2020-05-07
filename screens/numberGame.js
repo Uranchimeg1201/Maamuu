@@ -131,7 +131,7 @@ export default class Game extends React.Component {
               }
               onPress={() => {
                
-                if (current.correctAnswer == ans) {
+                if (current.correctAnswer == index + 1) {
                       this.state.correctAnswer++
                   if (questions[currentIndexOfQuestion + 1]) {
                     this.setState({

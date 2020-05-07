@@ -9,7 +9,7 @@ const RootDrawerNavigator = createDrawerNavigator({
     screen: homeStack,
     navigationOptions: {
       headerStyle: {
-        backgroundColor: "#f4511e",
+        backgroundColor: "blue",
       },
     },
   },

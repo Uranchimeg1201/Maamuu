@@ -110,7 +110,7 @@ export default class Game extends React.Component {
         <View style={styles.header}>
           <Image
             source={{ uri: current.questions }}
-            style={{ width: 210, height: 280 }}
+            style={{ width: 160, height: 230 }}
           />  
         </View>
         <View>
