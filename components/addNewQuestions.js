@@ -25,24 +25,21 @@ import { Checkbox } from "react-native-paper";
 
 export default class Game extends React.Component {
   addNewData(number, answer1, answer2, answer3, answer4, correctAnswer, questions) {
-    firebase
-      .database()
-      .ref("/Game2" + number  + correctAnswer + questions)
-      .push({
-        number,
+    var ref = firebase.database().ref('/Game2').child(number);
+    ref.update({
+      answer: [
         answer1,
         answer2,
         answer3,
-        answer4,
-        correctAnswer,
-        questions,
-      
-      })
-      .then(() => {
-        Alert.alert("Амжилттай бүртгэгдлээ");
-      }).catch((error) => {
-        console.log(error);
-      });
+        answer4
+      ],
+      correctAnswer,
+      questions,
+    }).then(() => {
+      Alert.alert("Амжилттай бүртгэгдлээ");
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   render() {

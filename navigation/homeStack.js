@@ -17,6 +17,7 @@ import listenGame from "../screens/listenGame";
 import rest from "../screens/rest";
 import admin from "../screens/admin";
 import addNewQuestions from "../components/addNewQuestions";
+import menuBar from "../components/menuBar";
 //import flagGame from '../components/flagGame';
 
 import React from "react";
@@ -32,22 +33,40 @@ const screens = {
 
   Animal: {
     screen: Animal,
+    navigationOptions:{
+      title: 'Амьтан'
+    }
   },
 
   Color: {
     screen: Color,
+    navigationOptions:{
+      title: 'Өнгө'
+    }
   },
   Flag: {
     screen: Flag,
+    navigationOptions:{
+      title: 'Улс орон'
+    }
   },
   Number: {
     screen: Number,
+    navigationOptions:{
+      title: 'Тоо'
+    }
   },
   Shape: {
     screen: Shape,
+    navigationOptions:{
+      title: 'Дүрс'
+    }
   },
   Play: {
     screen: Play,
+    navigationOptions:{
+      title: 'Тоглоом'
+    }
   },
   Login: {
     screen: Login,
@@ -63,16 +82,28 @@ const screens = {
   },
   numberGame: {
     screen: numberGame,
+    navigationOptions:{
+      title: 'Тоогоо бодоцгооё'
+    }
   },
 
   animalGame: {
     screen: animalGame,
+    navigationOptions:{
+      title: 'Хараад сонгоорой'
+    }
   },
   listenGame:{
     screen: listenGame,
+    navigationOptions:{
+      title: 'Сонсоод сонгоорой'
+    }
   },
   rest:{
     screen: rest,
+    navigationOptions:{
+      title: 'Амрах цаг боллоо!'
+    }
   },
   admin:{
     screen: admin,
@@ -80,6 +111,9 @@ const screens = {
   addNewQuestions:{
     screen: addNewQuestions,
   },
+  menuBar:{
+    screen: menuBar,
+  }
 };
 
 const HomeStack = createStackNavigator(screens, {

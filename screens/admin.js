@@ -15,15 +15,25 @@ import * as firebase from "firebase";
 import { NavigationEvents } from "react-navigation";
 
 export default class Admin extends React.Component {
-
   constructor(props) {
     super(props);
+    this.state = {
+      paths: []
+    };
   }
 
   async componentDidMount() {
     await Permissions.askAsync(Permissions.CAMERA_ROLL);
     await Permissions.askAsync(Permissions.CAMERA);
+
+    var ref = firebase.storage().ref('/');
+    var res = await ref.listAll();
+
+    for(var folderRef of res.prefixes){
+      this.setState({paths: [...this.state.paths, folderRef.fullPath]})
+    }
   }
+
   onDeleteImagePress = async () =>{
 
   }
