@@ -12,7 +12,7 @@ import Swiper from "react-native-web-swiper";
 
 import { Audio, Video } from "expo-av";
 const xyloSounds = {
-  one: require("../assets/Audio/test.aac"),
+  one: require("../assets/Audio/AnimalVideo/Home 5.mp3"),
   two: require("../assets/Audio/test.aac"),
   three: require("../assets/Audio/test.aac"),
   four: require("../assets/Audio/test.aac"),

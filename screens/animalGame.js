@@ -11,22 +11,17 @@ import {
 } from "react-native";
 import * as firebase from "firebase";
 import { Checkbox } from "react-native-paper";
-//import * as Random from 'expo-random';
+
 const db = firebase.database();
 let itemsRef = db.ref("/Game1");
-
-//const db =firebase.database().ref();
-//const question =db.collection('Game1');
-//const db = app.database();
-//const itemsRef =db1.collection('/Game1');
 
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
   },
   header: {
     alignSelf: "stretch",
@@ -36,16 +31,14 @@ const styles = StyleSheet.create({
     //flex: 1,
     justifyContent: "center",
   },
-  answer:{
-
+  answer: {
     shadowColor: "#5895D6",
     shadowOpacity: 1,
     shadowRadius: 1,
     fontSize: 42,
     color: "#7558D6",
     marginTop: 20,
-  
-  }
+  },
 });
 
 export default class Game extends React.Component {
@@ -83,7 +76,7 @@ export default class Game extends React.Component {
   render() {
     let aKyes;
     if (!this.state.questions.length)
-     return <View style={styles.container}></View>;
+      return <View style={styles.container}></View>;
     if (this.state.isLastTest)
       return (
         <View style={styles.container}>
@@ -104,40 +97,40 @@ export default class Game extends React.Component {
       <View style={styles.container}>
         <ImageBackground
           source={require("../assets/logo/45.jpg")}
-          resizeMode='stretch'
+          resizeMode="stretch"
           style={styles.container}
         >
-        <View style={styles.header}>
-          <Image
-            source={{ uri: current.questions }}
-            style={{ width: 160, height: 230 }}
-          />  
-        </View>
-        <View>
-          {currentAnswers.map((ans, index) => (
-            <Checkbox.Item
-              style={styles.answer}
-              key={index}
-              label={ans}
-              status={
-                currentCheckedAnswer === index + 1 ? "checked" : "unchecked"
-              }
-              onPress={() => {
-                console.log(current.correctAnswer, ans);
-                if (current.correctAnswer == index + 1) {
-                  if (questions[currentIndexOfQuestion + 1]) {
-                    this.setState({
-                      currentIndexOfQuestion: currentIndexOfQuestion + 1,
-                    });
-                  } else {
-                    this.setState({ isLastTest: true });
-                  }
-                }
-                this.setState({ currentCheckedAnswer: index + 1 });
-              }}
+          <View style={styles.header}>
+            <Image
+              source={{ uri: current.questions }}
+              style={{ width: 160, height: 230 }}
             />
-          ))}
-        </View>
+          </View>
+          <View>
+            {currentAnswers.map((ans, index) => (
+              <Checkbox.Item
+                style={styles.answer}
+                key={index}
+                label={ans}
+                status={
+                  currentCheckedAnswer === index + 1 ? "checked" : "unchecked"
+                }
+                onPress={() => {
+                  console.log(current.correctAnswer, ans);
+                  if (current.correctAnswer === index + 1) {
+                    if (questions[currentIndexOfQuestion + 1]) {
+                      this.setState({
+                        currentIndexOfQuestion: currentIndexOfQuestion + 1,
+                      });
+                    } else {
+                      this.setState({ isLastTest: true });
+                    }
+                  }
+                  this.setState({ currentCheckedAnswer: index + 1 });
+                }}
+              />
+            ))}
+          </View>
         </ImageBackground>
       </View>
     );

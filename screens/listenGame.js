@@ -18,14 +18,12 @@ import { firebaseConfig } from "../config/ApiKeys.demo";
 import { Checkbox, Button } from "react-native-paper";
 import { Audio, Video } from "expo-av";
 import { AntDesign } from "@expo/vector-icons";
-//import * as firebase from "firebase";
-const db = firebase.database();
-let itemsRef = db.ref("/Game3");
+import FinishGame from "../components/gameFinish";
 
-//const db =firebase.database().ref();
-//const question =db.collection('Game1');
-//const db = app.database();
-//const itemsRef =db1.collection('/Game1');
+
+console.disableYellowBox = true;
+  const db = firebase.database();
+  let itemsRef = db.ref("/Game3");
 
 const styles = StyleSheet.create({
   container: {
@@ -68,7 +66,7 @@ export default class Listen extends React.Component {
     questions: [], //Шалгалтын асуулт
     answers: [], //Шалгалтын хариу
     loading: true,
-    userAnswers: [], // Хэрэглэгчийн хариулт
+
     questionIndex: 0,
     correctAnswer: [],
     result: 0,
@@ -105,12 +103,12 @@ export default class Listen extends React.Component {
       Audio.Sound.createAsync(source, { shouldPlay: true }).then(
         (sound, status) => {
           console.log(sound, status);
-          sound.loadAsync();
+           sound.loadAsync();
         }
       );
-      // Your sound is playing!
+     
     } catch (error) {
-      // An error occurred!
+      console.log(error);
     }
   };
 
@@ -120,7 +118,7 @@ export default class Listen extends React.Component {
     if (this.state.isLastTest)
       return (
         <View style={styles.container}>
-          <Text>YOU COMPLATED TEST</Text>
+          <FinishGame />
         </View>
       );
 
@@ -165,9 +163,12 @@ export default class Listen extends React.Component {
                 <TouchableOpacity
                   key={index}
                   onPress={() => {
-                    console.log("current::", current.correctAnswer);
+                    console.log(
+                      "current correctAnswer::",
+                      current.correctAnswer
+                    );
                     console.log("index::", index);
-                    
+
                     if (current.correctAnswer == index + 1) {
                       if (questions[currentIndexOfQuestion + 1]) {
                         this.setState({
@@ -179,7 +180,6 @@ export default class Listen extends React.Component {
                     }
                     this.setState({ currentCheckedAnswer: index + 1 });
                   }}
-               
                 >
                   <Image style={styles.image} source={{ uri: item }} />
                 </TouchableOpacity>

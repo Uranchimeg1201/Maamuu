@@ -19,6 +19,7 @@ import SwiperFlatList from "react-native-swiper-flatlist";
 //import 'firebase/firestore';
 import { firebaseConfig } from "../config/ApiKeys.demo";
 import { Checkbox } from "react-native-paper";
+
 //import * as firebase from "firebase";
 //const db = firebase.database();
 //let itemsRef = db.ref("/Game2");
@@ -54,7 +55,7 @@ export default class Game extends React.Component {
 
           <TextInput
             style={styles.from}
-            placeholder="enter number"
+            placeholder="enter ID"
             onChangeText={(number) => this.setState({ number })}
           />
           <TextInput

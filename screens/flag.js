@@ -3,13 +3,17 @@ import { StyleSheet, Text, View, Image, ImageBackground, TouchableOpacity} from 
 import Swiper from "react-native-web-swiper";
 import {Audio} from 'expo-av';
 const xyloSounds = {
-  one: require("../assets/Audio/test.aac"),
-  two: require("../assets/Audio/test.aac"),
-  three: require("../assets/Audio/test.aac"),
-  four: require("../assets/Audio/test.aac"),
-  five: require("../assets/Audio/test.aac"),
-  six: require("../assets/Audio/test.aac"),
-  seven: require("../assets/Audio/test.aac"),
+  one: require("../assets/Audio/AnimalVideo/8.mp3"),
+  two: require("../assets/Audio/AnimalVideo/9.mp3"),
+  three: require("../assets/Audio/AnimalVideo/11.mp3"),
+  four: require("../assets/Audio/AnimalVideo/Home.mp3"),
+  five: require("../assets/Audio/AnimalVideo/7.mp3"),
+  six: require("../assets/Audio/AnimalVideo/Home 2.mp3"),
+  seven: require("../assets/Audio/AnimalVideo/Home 6.mp3"),
+  eight: require("../assets/Audio/AnimalVideo/Home 3.mp3"),
+  nine: require("../assets/Audio/AnimalVideo/Home 2.mp3"),
+  ten: require("../assets/Audio/AnimalVideo/Home 4.mp3"),
+  
 };
 
  class Animal extends React.Component {
@@ -55,10 +59,22 @@ const xyloSounds = {
           <View style={[styles.slideContainer, styles.slide1]}>
             <Image
               style={styles.image1}
+              source={require("../assets/flag/canada.png")}
+            />
+            <TouchableOpacity onPress={() => this.PlaySound("two")}>
+            <Text style={styles.mongolText}>Улс: Канад</Text>
+            <Text style={styles.UbText}>Нийслэл хот : Оттава</Text>
+            </TouchableOpacity>
+          </View>
+          <View style={[styles.slideContainer, styles.slide1]}>
+            <Image
+              style={styles.image1}
               source={require("../assets/flag/russia.png")}
             />
+            <TouchableOpacity onPress={() => this.PlaySound("three")}>
             <Text style={styles.mongolText}>Улс: Орос</Text>
             <Text style={styles.UbText}>Нийслэл хот : Москва</Text>
+            </TouchableOpacity>
           </View>
           <View style={[styles.slideContainer, styles.slide1]}>
             <Image
@@ -117,14 +133,7 @@ const xyloSounds = {
             <Text style={styles.mongolText}>Улс: Бразил</Text>
             <Text style={styles.UbText}>Нийслэл хот : Бразилиа</Text>
           </View>
-          <View style={[styles.slideContainer, styles.slide1]}>
-            <Image
-              style={styles.image1}
-              source={require("../assets/flag/canada.png")}
-            />
-            <Text style={styles.mongolText}>Улс: Канад</Text>
-            <Text style={styles.UbText}>Нийслэл хот : Оттава</Text>
-          </View>
+        
           <View style={[styles.slideContainer, styles.slide1]}>
             <Image
               style={styles.image1}

@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   ImageBackground,
   Alert,
+  Animated,
 } from "react-native";
 import Swiper from "react-native-web-swiper";
 import * as firebase from "firebase";
@@ -16,6 +17,7 @@ import SwiperFlatList from "react-native-swiper-flatlist";
 //import 'firebase/firestore';
 import { firebaseConfig } from "../config/ApiKeys.demo";
 import { Checkbox } from "react-native-paper";
+import Finish from "../components/gameFinish";
 //import * as firebase from "firebase";
 const db = firebase.database();
 let itemsRef = db.ref("/Game2");
@@ -30,9 +32,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     flex: 1,
-    width: '100%',
-    height: '100%',
-    
+    width: "100%",
+    height: "100%",
   },
   header: {
     alignSelf: "stretch",
@@ -48,14 +49,14 @@ const styles = StyleSheet.create({
     shadowRadius: 1,
     fontSize: 42,
     color: "#7558D6",
-    marginRight:30,
+    marginRight: 30,
   },
   answer: {
     shadowColor: "#5895D6",
     shadowOpacity: 1,
     shadowRadius: 1,
     color: "red",
-    marginRight:30,
+    marginRight: 30,
   },
 });
 
@@ -67,7 +68,7 @@ export default class Game extends React.Component {
     userAnswers: [], // Хэрэглэгчийн хариулт
     questionIndex: 0,
     correctAnswer: 0,
-    worngAnswer:0,
+    worngAnswer: 0,
     result: 0,
     currentCheckedAnswer: 0,
     currentIndexOfQuestion: 0,
@@ -99,7 +100,7 @@ export default class Game extends React.Component {
     if (this.state.isLastTest)
       return (
         <View style={styles.container}>
-          <Text>YOU COMPLATED TEST</Text>
+          <Finish/>
         </View>
       );
     let {
@@ -115,40 +116,36 @@ export default class Game extends React.Component {
       <View style={styles.container}>
         <ImageBackground
           source={require("../assets/logo/4.jpg")}
-          resizeMode='stretch'
+          resizeMode="stretch"
           style={styles.container}
         >
-        <View style={styles.header}>
-          <Text style={styles.question}> {current.questions} </Text>
-        </View>
-        <View style={styles.answer}>
-          {currentAnswers.map((ans, index) => (
-            <Checkbox.Item
-              key={index}
-              label={ans}
-              status={
-                currentCheckedAnswer === index + 1 ? "checked" : "unchecked"
-              }
-              onPress={() => {
-               
-                if (current.correctAnswer == index + 1) {
-                      this.state.correctAnswer++
-                  if (questions[currentIndexOfQuestion + 1]) {
-                    this.setState({
-                      currentIndexOfQuestion: currentIndexOfQuestion + 1,
+          <View style={styles.header}>
+            <Text style={styles.question}> {current.questions} </Text>
+          </View>
+          <View style={styles.answer}>
+            {currentAnswers.map((ans, index) => (
+              <Checkbox.Item
+                key={index}
+                label={ans}
+                status={
+                  currentCheckedAnswer === index + 1 ? "checked" : "unchecked"
+                }
+                onPress={() => {
+                  if (current.correctAnswer == index + 1) {
+                    if (questions[currentIndexOfQuestion + 1]) {
+                      this.setState({
+                        currentIndexOfQuestion: currentIndexOfQuestion + 1,
                       });
-                   
-                  } else {
-                    this.setState({ isLastTest: true });
+                    } else {
+                      this.setState({ isLastTest: true });
+                    }
                   }
-                } else
-                alert("Зөв хариулт нь:" + current.correctAnswer);
-                this.setState({ currentCheckedAnswer: index + 1 });
-          
-              }}
-            />
-          ))}
-        </View>
+                  // alert("Зөв хариулт нь:" + current.correctAnswer[]);
+                  else this.setState({ currentCheckedAnswer: index + 1 });
+                }}
+              />
+            ))}
+          </View>
         </ImageBackground>
       </View>
     );

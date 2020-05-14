@@ -18,6 +18,7 @@ import rest from "../screens/rest";
 import admin from "../screens/admin";
 import addNewQuestions from "../components/addNewQuestions";
 import menuBar from "../components/menuBar";
+import Finish from "../components/gameFinish";
 //import flagGame from '../components/flagGame';
 
 import React from "react";
@@ -113,6 +114,9 @@ const screens = {
   },
   menuBar:{
     screen: menuBar,
+  },
+  Finish:{
+    screen:Finish,
   }
 };
 

@@ -10,7 +10,7 @@ import {
   TouchableHighlight,
   Button,
 } from "react-native";
-import * as fabfirebaseapp from "firebase";
+
 import Swiper from "react-native-web-swiper";
 import { Audio } from "expo-av";
 import { NavigationActions } from "react-navigation";

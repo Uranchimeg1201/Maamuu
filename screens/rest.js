@@ -1,35 +1,80 @@
-import * as React from 'react';
-
+import React from "react";
 import {
   View,
+  Image,
+  StyleSheet,
   Text,
-  StyleSheet
+  ImageBackground,
+  Button,
+  TouchableHighlight,
+  TouchableOpacity,
+  BackHandler,
 } from "react-native";
+import RNExitApp from 'react-native-exit-app';
 
-const styles = StyleSheet.create({
-  container: {
-        alignItems:'center',
-        justifyContent:'center',
-        flex:1
-    },
-     header: {
-        alignSelf: 'stretch',
-        alignItems: 'center',
-    },
-  text:{
-      //flex: 1,
-      justifyContent:'center',
+import { Audio } from "expo-av";
+
+const xyloSounds = {
+  one: require("../assets/Audio/AnimalVideo/ring.mp3"),
+};
+
+class Finish extends React.Component {
+  constructor(props) {
+    super(props);
   }
-});
+  
+  PlaySound = async (note) => {
+    const soundObject = new Audio.Sound();
 
-export default class Rest extends React.Component {
+    try {
+      let source = xyloSounds[note];
+      // let source = require('./assets/note1.wav')
+      await soundObject.loadAsync(source);
+      await soundObject
+        .playAsync()
+        .then(async (playbackStatus) => {
+          setTimeout(() => {
+            soundObject.unloadAsync();
+          }, playbackStatus.playableDurationMillis);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
+  Play = () => {
+    this.props.navigation.navigate("listenGame");
+  };
   render() {
     return (
       <View style={styles.container}>
-        <Text>YOU MUST REST</Text>
+        <TouchableOpacity onPress={() => this.PlaySound("one")}>
+          <ImageBackground
+            source={require("../assets/logo/time.png")}
+            resizeMode="stretch"
+            style={styles.container}
+          ></ImageBackground>
+        </TouchableOpacity>
       </View>
     );
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignContent: "center",
+    alignItems: "center",
+    marginLeft:-100,
+    width: "100%",
+    height: "100%",
+  },
+  
+});
+
+//RNExitApp.exitApp();
+
+export default Finish;

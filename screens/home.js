@@ -13,12 +13,12 @@ import firebase from "../config/firebase";
 
 export default function App({ navigation }) {
 
-  // useEffect(()=>{
-  //   setTimeout(()=>{
-  //     console.log('rest')
-  //     navigation.push('rest')
-  //   }, 5000)
-  // }, []);
+  useEffect(()=>{
+    setTimeout(()=>{
+      console.log('rest')
+      navigation.push('rest')
+    }, 5000)
+  }, []);
 
   const onPressHandler = (item) => {
     const db = firebase.storage();
@@ -60,7 +60,7 @@ export default function App({ navigation }) {
       name: "Тоглох",
       id: "6",
       navigation: "Play",
-      img: require("../assets/PageImage/flag.jpg"),
+      img: require("../assets/logo/playhome.jpg"),
     },
   ];
 
