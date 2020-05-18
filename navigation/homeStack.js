@@ -9,7 +9,7 @@ import Play from "../screens/play";
 import Header from "../components/header";
 import Login from "../screens/login";
 import Sign from "../screens/SignUp";
-import Password from "../screens/ForgotPassword";
+
 import Video from "../screens/video";
 import animalGame from "../screens/animalGame";
 import numberGame from "../screens/numberGame";
@@ -75,9 +75,7 @@ const screens = {
   SignUp: {
     screen: Sign,
   },
-  Password: {
-    screen: Password,
-  },
+  
   Video: {
     screen: Video,
   },

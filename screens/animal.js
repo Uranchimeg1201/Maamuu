@@ -11,22 +11,15 @@ import {
 import Swiper from "react-native-web-swiper";
 
 import { Audio, Video } from "expo-av";
-const xyloSounds = {
-  one: require("../assets/Audio/AnimalVideo/Home 5.mp3"),
-  two: require("../assets/Audio/test.aac"),
-  three: require("../assets/Audio/test.aac"),
-  four: require("../assets/Audio/test.aac"),
-  five: require("../assets/Audio/test.aac"),
-  six: require("../assets/Audio/test.aac"),
-  seven: require("../assets/Audio/test.aac"),
-};
+import { animals } from "../components/data";
+import { Sounds } from "../components/data";
 
 class Component extends React.Component {
   handlePlaySound = async (note) => {
     const soundObject = new Audio.Sound();
 
     try {
-      let source = xyloSounds[note];
+      let source = Sounds[note];
       // let source = require('./assets/note1.wav')
       await soundObject.loadAsync(source);
       await soundObject
@@ -45,6 +38,7 @@ class Component extends React.Component {
   };
 
   render() {
+    console.log("animals:: ", animals);
     return (
       <View style={styles.container}>
         <ImageBackground
@@ -53,30 +47,17 @@ class Component extends React.Component {
           style={styles.container}
         >
           <Swiper>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <Image
-                style={styles.image1}
-                source={require("../assets/animal/shar_shuwuu.png")}
-              />
-              <TouchableOpacity onPress={() => this.handlePlaySound("one")}>
-                <Text style={styles.sharText}>Шар шувуу</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={[styles.slideContainer, styles.slide2]}>
-              <Image
-                style={styles.image2}
-                source={require("../assets/animal/tahi.png")}
-              />
+            {animals.map((animal, index) => (
+              <View key={index} style={[styles.slideContainer, styles.slide1]}>
+                <Image style={styles.image1} source={animal.imageUrl} />
+                <TouchableOpacity
+                  onPress={() => this.handlePlaySound(animal.playSound)}
+                >
+                  <Text style={styles.sharText}>{animal.name}</Text>
+                </TouchableOpacity>
+              </View>
+            ))}
 
-              <Text style={styles.anaashText}>Эрээн тахь</Text>
-            </View>
-            <View style={[styles.slideContainer, styles.slide3]}>
-              <Image
-                style={styles.image3}
-                source={require("../assets/animal/arslan.png")}
-              />
-              <Text style={styles.arslanText}>Арслан</Text>
-            </View>
             <View style={[styles.slideContainer, styles.slide4]}>
               <Image
                 style={styles.image4}
@@ -91,27 +72,7 @@ class Component extends React.Component {
               />
               <Text style={styles.bvrgedText}>Бар</Text>
             </View>
-            <View style={[styles.slideContainer, styles.slide6]}>
-              <Image
-                style={styles.image6}
-                source={require("../assets/animal/koala.png")}
-              />
-              <Text style={styles.bvrgedText}>Коала</Text>
-            </View>
-            <View style={[styles.slideContainer, styles.slide7]}>
-              <Image
-                style={styles.image7}
-                source={require("../assets/animal/penguin.png")}
-              />
-              <Text style={styles.bvrgedText}>Оцон шувуу</Text>
-            </View>
-            <View style={[styles.slideContainer, styles.slide8]}>
-              <Image
-                style={styles.image8}
-                source={require("../assets/animal/orca.png")}
-              />
-              <Text style={styles.bvrgedText}>Сэлэмт халим</Text>
-            </View>
+
             <View style={[styles.slideContainer, styles.slide9]}>
               <Image
                 style={styles.image9}
@@ -164,67 +125,47 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   image1: {
-    height: "45%",
-    width: "65%",
+    marginTop: 30,
+    height: "40%",
+    width: "51%",
   },
 
-  image2: {
-    paddingTop: 30,
-    height: "45%",
-    width: "65%",
-  },
-  image3: {
-    height: "40%",
-    width: "60%",
-  },
   image4: {
     marginLeft: 25,
     height: "40%",
     width: "85%",
   },
   image5: {
-    height: "50%",
-    width: "100%",
+    height: 200,
+    width: 300,
   },
-  image6: {
-    height: "40%",
-    width: "60%",
-  },
-  image7: {
-    marginTop: 30,
-    height: "45%",
-    width: "50%",
-  },
-  image8: {
-    marginTop: 30,
-    height: "45%",
-    width: "60%",
-  },
+
   image9: {
     marginTop: 30,
-    height: "40%",
+    height: "42%",
     width: "50%",
   },
   image10: {
     paddingTop: 30,
-    height: "53%",
-    width: "62%",
+    height: 290,
+    width: 210,
   },
   image11: {
     paddingTop: 30,
-    height: "49%",
-    width: "52%",
+    height: 180,
+    width: 120,
   },
   image12: {
     paddingTop: 30,
-    height: "40%",
-    width: "70%",
+    height: 180,
+    width: 200,
   },
   image13: {
     height: 400,
     width: 327,
   },
   sharText: {
+    paddingTop: 50,
     fontSize: 24,
     fontWeight: "bold",
   },

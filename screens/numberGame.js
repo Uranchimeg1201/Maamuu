@@ -68,6 +68,7 @@ export default class Game extends React.Component {
     userAnswers: [], // Хэрэглэгчийн хариулт
     questionIndex: 0,
     correctAnswer: 0,
+    failedCount: 0,
     worngAnswer: 0,
     result: 0,
     currentCheckedAnswer: 0,
@@ -94,13 +95,14 @@ export default class Game extends React.Component {
   }
 
   render() {
+    console.log(this.props.navigation)
     let aKyes;
     if (!this.state.questions.length)
       return <View style={styles.container}></View>;
     if (this.state.isLastTest)
       return (
         <View style={styles.container}>
-          <Finish/>
+          <Finish navigation={this.props.navigation} failedCount={this.state.failedCount}/>
         </View>
       );
     let {
@@ -127,6 +129,10 @@ export default class Game extends React.Component {
               <Checkbox.Item
                 key={index}
                 label={ans}
+                labelStyle={{
+                  backgroundColor: currentCheckedAnswer == index + 1 ? 'red':'white',
+                  fontSize: 20,
+                }}
                 status={
                   currentCheckedAnswer === index + 1 ? "checked" : "unchecked"
                 }
@@ -135,13 +141,14 @@ export default class Game extends React.Component {
                     if (questions[currentIndexOfQuestion + 1]) {
                       this.setState({
                         currentIndexOfQuestion: currentIndexOfQuestion + 1,
+                        currentCheckedAnswer: 0,
                       });
                     } else {
                       this.setState({ isLastTest: true });
                     }
                   }
                   // alert("Зөв хариулт нь:" + current.correctAnswer[]);
-                  else this.setState({ currentCheckedAnswer: index + 1 });
+                  else this.setState({ currentCheckedAnswer: index + 1, failedCount: ++this.state.failedCount });
                 }}
               />
             ))}

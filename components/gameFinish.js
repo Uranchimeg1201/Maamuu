@@ -17,7 +17,7 @@ class Finish extends React.Component {
   }
 
   Play = () => {
-    this.props.navigation.navigate("listenGame");
+    this.props.navigation.navigate("Play");
    
   };
   render() {
@@ -28,10 +28,14 @@ class Finish extends React.Component {
           resizeMode="stretch"
           style={styles.container}
         >
-          <Image
+          {this.props.failedCount < 6 ? <Image
             style={styles.image}
             source={require("../assets/logo/good.jpg")}
-          />
+          />: <Image
+          style={styles.image}
+          source={require("../assets/logo/111.jpg")}
+        />}
+          
           <TouchableHighlight
                 style={{
                   height: 50,

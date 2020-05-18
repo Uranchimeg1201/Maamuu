@@ -10,6 +10,7 @@ import {
 import * as fabfirebaseapp from "firebase";
 import Swiper from "react-native-web-swiper";
 import * as Speech from "expo-speech";
+import {Sounds, numbers} from '../components/data';
 //import SoundPlayer from "react-native-sound-player";
 
 class Component extends React.Component {
@@ -22,76 +23,16 @@ class Component extends React.Component {
           style={styles.container}
         >
           <Swiper>
-            <View style={[styles.slideContainer, styles.slide1]}>
+            {numbers.map((number, index) => (
+            <View key= {index} style={[styles.slideContainer, styles.slide1]}>
               <Image
                 style={styles.image1}
-                source={require("../assets/number/one2.png")}
+                source={number.imageUrl}
               />
-              <Text style={styles.sharText}>Нэг</Text>
+              <Text style={styles.sharText}>{number.name}</Text>
             </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <Image
-                style={styles.image1}
-                source={require("../assets/number/two.png")}
-              />
-              <Text style={styles.sharText}>Хоёр</Text>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <Image
-                style={styles.image1}
-                source={require("../assets/number/three.png")}
-              />
-              <Text style={styles.sharText}>Гурав</Text>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <Image
-                style={styles.image1}
-                source={require("../assets/number/four.png")}
-              />
-              <Text style={styles.sharText}>Дөрөв</Text>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <Image
-                style={styles.image1}
-                source={require("../assets/number/five.png")}
-              />
-              <Text style={styles.sharText}>Тав</Text>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <Image
-                style={styles.image1}
-                source={require("../assets/number/six.png")}
-              />
-              <Text style={styles.sharText}>Зургаа</Text>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <Image
-                style={styles.image1}
-                source={require("../assets/number/seven.png")}
-              />
-              <Text style={styles.sharText}>Долоо</Text>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <Image
-                style={styles.image1}
-                source={require("../assets/number/eight.png")}
-              />
-              <Text style={styles.sharText}>Найм</Text>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <Image
-                style={styles.image1}
-                source={require("../assets/number/nine.png")}
-              />
-              <Text style={styles.sharText}>Ес</Text>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <Image
-                style={styles.image1}
-                source={require("../assets/number/ten.png")}
-              />
-              <Text style={styles.sharText}>Арав</Text>
-            </View>
+            ))}
+           
           </Swiper>
         </ImageBackground>
       </View>

@@ -46,19 +46,6 @@ const styles = StyleSheet.create({
     color: "white",
     marginVertical: 8,
   },
-  image: {
-    width: 115,
-    height: 145,
-    display: "flex",
-    justifyContent: "center",
-    alignContent: "center",
-    alignItems: "center",
-    marginLeft: 30,
-    marginTop: 30,
-    marginRight: 30,
-    borderColor: "black",
-    borderWidth: 3,
-  },
 });
 
 export default class Listen extends React.Component {
@@ -122,11 +109,12 @@ export default class Listen extends React.Component {
         </View>
       );
 
-    let { questions, currentIndexOfQuestion } = this.state;
+    let { questions, currentIndexOfQuestion, currentCheckedAnswer } = this.state;
     let current = questions[currentIndexOfQuestion];
     let currentAnswers = [...current.answer];
     currentAnswers.shift(1);
-    console.log(currentAnswers);
+    console.log(current.correctAnswer);
+    console.log(currentCheckedAnswer);
     return (
       <View style={styles.container}>
         <ImageBackground
@@ -161,6 +149,9 @@ export default class Listen extends React.Component {
             renderItem={({ item, index }) => {
               return (
                 <TouchableOpacity
+                  style={{
+                    borderColor: 'red'
+                  }}
                   key={index}
                   onPress={() => {
                     console.log(
@@ -173,6 +164,7 @@ export default class Listen extends React.Component {
                       if (questions[currentIndexOfQuestion + 1]) {
                         this.setState({
                           currentIndexOfQuestion: currentIndexOfQuestion + 1,
+                          currentCheckedAnswer: 0
                         });
                       } else {
                         this.setState({ isLastTest: true });
@@ -181,7 +173,19 @@ export default class Listen extends React.Component {
                     this.setState({ currentCheckedAnswer: index + 1 });
                   }}
                 >
-                  <Image style={styles.image} source={{ uri: item }} />
+                  <Image style={{
+                    width: 115,
+                    height: 145,
+                    display: "flex",
+                    justifyContent: "center",
+                    alignContent: "center",
+                    alignItems: "center",
+                    marginLeft: 30,
+                    marginTop: 30,
+                    marginRight: 30,
+                    borderColor: 'black',
+                    borderWidth: 3,
+                  }} source={{ uri: item }} />
                 </TouchableOpacity>
               );
             }}
