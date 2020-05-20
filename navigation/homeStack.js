@@ -9,7 +9,7 @@ import Play from "../screens/play";
 import Header from "../components/header";
 import Login from "../screens/login";
 import Sign from "../screens/SignUp";
-
+import UploadPicture from "../components/UploadPicture";
 import Video from "../screens/video";
 import animalGame from "../screens/animalGame";
 import numberGame from "../screens/numberGame";
@@ -19,6 +19,7 @@ import admin from "../screens/admin";
 import addNewQuestions from "../components/addNewQuestions";
 import menuBar from "../components/menuBar";
 import Finish from "../components/gameFinish";
+
 //import flagGame from '../components/flagGame';
 
 import React from "react";
@@ -115,7 +116,10 @@ const screens = {
   },
   Finish:{
     screen:Finish,
-  }
+  },
+  UploadPicture:{
+    screen: UploadPicture,
+  },
 };
 
 const HomeStack = createStackNavigator(screens, {

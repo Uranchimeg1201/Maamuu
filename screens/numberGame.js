@@ -52,9 +52,9 @@ const styles = StyleSheet.create({
     marginRight: 30,
   },
   answer: {
-    shadowColor: "#5895D6",
-    shadowOpacity: 1,
-    shadowRadius: 1,
+    // shadowColor: "#5895D6",
+    // shadowOpacity: 1,
+    // shadowRadius: 1,
     color: "red",
     marginRight: 30,
   },
@@ -63,17 +63,10 @@ const styles = StyleSheet.create({
 export default class Game extends React.Component {
   state = {
     questions: [], //Шалгалтын асуулт
-    answers: [], //Шалгалтын хариу
-    loading: true,
-    userAnswers: [], // Хэрэглэгчийн хариулт
-    questionIndex: 0,
-    correctAnswer: 0,
-    failedCount: 0,
-    worngAnswer: 0,
-    result: 0,
-    currentCheckedAnswer: 0,
-    currentIndexOfQuestion: 0,
-    isLastTest: false,
+    currentCheckedAnswer: 0, // Хэрэглэгчийн сонгосон хариулт
+    currentIndexOfQuestion: 0, // Асуултын index
+    isLastTest: false, // Хамгийн сүүлийн асуулт 
+    failedCount: 0, // Хэрэглэгчийн алдсан оноог тоолох хувьсагч
   };
 
   constructor(props) {
@@ -143,6 +136,7 @@ export default class Game extends React.Component {
                         currentIndexOfQuestion: currentIndexOfQuestion + 1,
                         currentCheckedAnswer: 0,
                       });
+                      console.log("currentCheckedAnswer" + currentCheckedAnswer)
                     } else {
                       this.setState({ isLastTest: true });
                     }

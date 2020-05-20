@@ -32,8 +32,8 @@ class Finish extends React.Component {
             style={styles.image}
             source={require("../assets/logo/good.jpg")}
           />: <Image
-          style={styles.image}
-          source={require("../assets/logo/111.jpg")}
+          style={styles.image2}
+          source={require("../assets/logo/normal.png")}
         />}
           
           <TouchableHighlight
@@ -70,6 +70,11 @@ const styles = StyleSheet.create({
     width: 250,
     height: 165,
   },
+  image2:{
+    marginTop:300,
+    width: 200,
+    height:200,
+  }
 });
 
 export default Finish;

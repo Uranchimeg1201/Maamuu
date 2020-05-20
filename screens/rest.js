@@ -5,30 +5,27 @@ import {
   StyleSheet,
   Text,
   ImageBackground,
-  Button,
-  TouchableHighlight,
   TouchableOpacity,
-  BackHandler,
 } from "react-native";
-import RNExitApp from 'react-native-exit-app';
+import RNExitApp from "react-native-exit-app";
 
 import { Audio } from "expo-av";
 
-const xyloSounds = {
-  one: require("../assets/Audio/AnimalVideo/ring.mp3"),
+const Sounds = {
+  one: require("../assets/Audio/AnimalVideo/old-fashioned-school-bell-daniel_simon.mp3"),
 };
 
 class Finish extends React.Component {
   constructor(props) {
     super(props);
   }
-  
+  componentDidMount() {
+    this.PlaySound('one');
+  }
   PlaySound = async (note) => {
     const soundObject = new Audio.Sound();
-
     try {
-      let source = xyloSounds[note];
-      // let source = require('./assets/note1.wav')
+      let source = Sounds[note];
       await soundObject.loadAsync(source);
       await soundObject
         .playAsync()
@@ -45,19 +42,16 @@ class Finish extends React.Component {
     }
   };
 
-  Play = () => {
-    this.props.navigation.navigate("listenGame");
-  };
   render() {
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => this.PlaySound("one")}>
+        
           <ImageBackground
             source={require("../assets/logo/time.png")}
             resizeMode="stretch"
             style={styles.container}
           ></ImageBackground>
-        </TouchableOpacity>
+       
       </View>
     );
   }
@@ -68,11 +62,9 @@ const styles = StyleSheet.create({
     flex: 1,
     alignContent: "center",
     alignItems: "center",
-    marginLeft:-100,
     width: "100%",
     height: "100%",
   },
-  
 });
 
 //RNExitApp.exitApp();

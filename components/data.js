@@ -60,6 +60,10 @@ export const numbers=[
 ]
 
 export const shapes=[
-    {imageUrl:require(''), name:'Дугуй'}
+    {imageUrl:require('../assets/shape/circle.png'), name:'Дугуй', playSound:'one'},
+    {imageUrl:require('../assets/shape/cross.png'), name:'Хэрээс', playSound:'one'},
+    {imageUrl:require('../assets/shape/images.png'), name:'Зургаан талт', playSound:'one'},
+    {imageUrl:require('../assets/shape/square.png'), name:'Квадрат', playSound:'one'},
+ {imageUrl:require('../assets/shape/download.jpeg'), name:'Таван хошуу', playSound:'one'},
 ]
 

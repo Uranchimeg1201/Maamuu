@@ -11,19 +11,14 @@ import {
 import * as fabfirebaseapp from "firebase";
 import Swiper from "react-native-web-swiper";
 import { Audio } from "expo-av";
-
-//import SoundPlayer from "react-native-sound-player";
-
-const xyloSounds = {
-  one: require("../assets/Audio/test.aac"),
-};
+import { Sounds, shapes } from "../components/data";
 
 class Component extends React.Component {
   handlePlaySound = async (note) => {
     const soundObject = new Audio.Sound();
 
     try {
-      let source = xyloSounds[note];
+      let source = Sounds[note];
       // let source = require('./assets/note1.wav')
       await soundObject.loadAsync(source);
       await soundObject
@@ -50,38 +45,16 @@ class Component extends React.Component {
           style={styles.container}
         >
           <Swiper>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <Image
-                style={styles.image1}
-                source={require("../assets/shape/circle.png")}
-              />
-              <TouchableOpacity onPress={() => this.handlePlaySound("one")}>
-                <Text style={styles.sharText}>Дугуй</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <TouchableOpacity>
-                <Image
-                  style={styles.image1}
-                  source={require("../assets/shape/cross.png")}
-                />
-                <Text style={styles.sharText}>Хоёр</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <Image
-                style={styles.image1}
-                source={require("../assets/shape/hexagon.png")}
-              />
-              <Text style={styles.sharText}>Зургаан талт</Text>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <Image
-                style={styles.image1}
-                source={require("../assets/shape/square.png")}
-              />
-              <Text style={styles.sharText}>Квадрат</Text>
-            </View>
+            {shapes.map((shape, index) => (
+              <View key={index} style={[styles.slideContainer, styles.slide1]}>
+                <Image style={styles.image1} source={shape.imageUrl} />
+                <TouchableOpacity
+                  onPress={() => this.handlePlaySound(shape.playSound)}
+                >
+                  <Text style={styles.sharText}>{shape.name}</Text>
+                </TouchableOpacity>
+              </View>
+            ))}
             <View style={[styles.slideContainer, styles.slide1]}>
               <Image
                 style={styles.image2}
@@ -102,13 +75,6 @@ class Component extends React.Component {
                 source={require("../assets/shape/tegshontsogt.png")}
               />
               <Text style={styles.sharText}>Тэгш өнцөгт</Text>
-            </View>
-            <View style={[styles.slideContainer, styles.slide1]}>
-              <Image
-                style={styles.image1}
-                source={require("../assets/shape/star.png")}
-              />
-              <Text style={styles.sharText}>Таван хошуу</Text>
             </View>
           </Swiper>
         </ImageBackground>
@@ -139,13 +105,13 @@ const styles = StyleSheet.create({
   },
   image2: {
     marginTop: 100,
-    width: "60%",
-    height: "20%",
+    width: 200,
+    height: 100,
   },
   image3: {
     marginTop: 100,
-    width: "60%",
-    height: "36%",
+    width: 200,
+    height: 190,
   },
   image4: {
     marginTop: 100,

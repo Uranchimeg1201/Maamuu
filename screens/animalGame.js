@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import * as firebase from "firebase";
 import { Checkbox } from "react-native-paper";
+import Finish from "../components/gameFinish";
 
 const db = firebase.database();
 let itemsRef = db.ref("/Game1");
@@ -32,27 +33,18 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   answer: {
-    shadowColor: "#5895D6",
-    shadowOpacity: 1,
-    shadowRadius: 1,
-    fontSize: 42,
-    color: "#7558D6",
-    marginTop: 20,
+    marginLeft: 50,
+    marginTop: 0,
   },
 });
 
 export default class Game extends React.Component {
   state = {
     questions: [], //Шалгалтын асуулт
-    answers: [], //Шалгалтын хариу
-    loading: true,
-    userAnswers: [], // Хэрэглэгчийн хариулт
-    questionIndex: 0,
-    correctAnswer: [],
-    result: 0,
-    currentCheckedAnswer: 0,
+    currentCheckedAnswer: 0, // Хэрэглэгчийн сонгосон хариулт
     currentIndexOfQuestion: 0, // Асуултын index
-    isLastTest: false,
+    isLastTest: false, // Хамгийн сүүлийн асуулт
+    failedCount: 0, // Хэрэглэгчийн алдсан оноог тоолох хувьсагч
   };
 
   constructor(props) {
@@ -80,7 +72,10 @@ export default class Game extends React.Component {
     if (this.state.isLastTest)
       return (
         <View style={styles.container}>
-          <Text>YOU COMPLATED TEST</Text>
+          <Finish
+            navigation={this.props.navigation}
+            failedCount={this.state.failedCount}
+          />
         </View>
       );
 
@@ -96,37 +91,47 @@ export default class Game extends React.Component {
     return (
       <View style={styles.container}>
         <ImageBackground
-          source={require("../assets/logo/45.jpg")}
+          source={require("../assets/logo/animalgame.jpg")}
           resizeMode="stretch"
           style={styles.container}
         >
           <View style={styles.header}>
             <Image
               source={{ uri: current.questions }}
-              style={{ width: 160, height: 230 }}
+              style={{ width: 150, height: 150, resizeMode: "stretch" }}
             />
           </View>
           <View>
             {currentAnswers.map((ans, index) => (
               <Checkbox.Item
-                style={styles.answer}
                 key={index}
                 label={ans}
+                labelStyle={{
+                  backgroundColor:
+                    currentCheckedAnswer == index + 1 ? "red" : "#FFE4B5",
+                  fontSize: 25,
+                }}
                 status={
                   currentCheckedAnswer === index + 1 ? "checked" : "unchecked"
                 }
                 onPress={() => {
-                  console.log(current.correctAnswer, ans);
-                  if (current.correctAnswer === index + 1) {
+                  if (current.correctAnswer == index + 1) {
                     if (questions[currentIndexOfQuestion + 1]) {
                       this.setState({
                         currentIndexOfQuestion: currentIndexOfQuestion + 1,
+                        currentCheckedAnswer: 0,
                       });
+                      console.log(
+                        "currentCheckedAnswer" + currentCheckedAnswer
+                      );
                     } else {
                       this.setState({ isLastTest: true });
                     }
-                  }
-                  this.setState({ currentCheckedAnswer: index + 1 });
+                  } else
+                    this.setState({
+                      currentCheckedAnswer: index + 1,
+                      failedCount: ++this.state.failedCount,
+                    });
                 }}
               />
             ))}

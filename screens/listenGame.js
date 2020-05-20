@@ -1,5 +1,4 @@
 import * as React from "react";
-
 import {
   StyleSheet,
   View,
@@ -20,10 +19,9 @@ import { Audio, Video } from "expo-av";
 import { AntDesign } from "@expo/vector-icons";
 import FinishGame from "../components/gameFinish";
 
-
 console.disableYellowBox = true;
-  const db = firebase.database();
-  let itemsRef = db.ref("/Game3");
+const db = firebase.database();
+let itemsRef = db.ref("/Game3");
 
 const styles = StyleSheet.create({
   container: {
@@ -51,15 +49,10 @@ const styles = StyleSheet.create({
 export default class Listen extends React.Component {
   state = {
     questions: [], //Шалгалтын асуулт
-    answers: [], //Шалгалтын хариу
-    loading: true,
-
-    questionIndex: 0,
-    correctAnswer: [],
-    result: 0,
-    currentCheckedAnswer: 0,
-    currentIndexOfQuestion: 0,
-    isLastTest: false,
+    currentCheckedAnswer: 0, // Хэрэглэгчийн сонгосон хариулт
+    currentIndexOfQuestion: 0, // Асуултын index
+    isLastTest: false, // Хамгийн сүүлийн асуулт 
+    failedCount: 0, // Хэрэглэгчийн алдсан оноог тоолох хувьсагч
   };
 
   constructor(props) {
@@ -90,10 +83,9 @@ export default class Listen extends React.Component {
       Audio.Sound.createAsync(source, { shouldPlay: true }).then(
         (sound, status) => {
           console.log(sound, status);
-           sound.loadAsync();
+          sound.loadAsync();
         }
       );
-     
     } catch (error) {
       console.log(error);
     }
@@ -105,11 +97,15 @@ export default class Listen extends React.Component {
     if (this.state.isLastTest)
       return (
         <View style={styles.container}>
-          <FinishGame />
+          <FinishGame  failedCount={this.state.failedCount} navigation={this.props.navigation}/>
         </View>
       );
 
-    let { questions, currentIndexOfQuestion, currentCheckedAnswer } = this.state;
+    let {
+      questions,
+      currentIndexOfQuestion,
+      currentCheckedAnswer,
+    } = this.state;
     let current = questions[currentIndexOfQuestion];
     let currentAnswers = [...current.answer];
     currentAnswers.shift(1);
@@ -150,7 +146,7 @@ export default class Listen extends React.Component {
               return (
                 <TouchableOpacity
                   style={{
-                    borderColor: 'red'
+                    borderColor: "red",
                   }}
                   key={index}
                   onPress={() => {
@@ -164,43 +160,37 @@ export default class Listen extends React.Component {
                       if (questions[currentIndexOfQuestion + 1]) {
                         this.setState({
                           currentIndexOfQuestion: currentIndexOfQuestion + 1,
-                          currentCheckedAnswer: 0
+                          currentCheckedAnswer: 0,
                         });
                       } else {
                         this.setState({ isLastTest: true });
                       }
                     }
-                    this.setState({ currentCheckedAnswer: index + 1 });
+                    this.setState({ currentCheckedAnswer: index + 1 , failedCount: ++this.state.failedCount});
                   }}
                 >
-                  <Image style={{
-                    width: 115,
-                    height: 145,
-                    display: "flex",
-                    justifyContent: "center",
-                    alignContent: "center",
-                    alignItems: "center",
-                    marginLeft: 30,
-                    marginTop: 30,
-                    marginRight: 30,
-                    borderColor: 'black',
-                    borderWidth: 3,
-                  }} source={{ uri: item }} />
+                  <Image
+                    style={{
+                      width: 150,
+                      height: 150,
+                      //display: '',
+                      resizeMode:'stretch',
+                      justifyContent: "center",
+                      alignContent: "center",
+                      alignItems: "center",
+                      marginLeft: 30,
+                      marginTop: 30,
+                      marginRight: 30,
+                      borderColor: "black",
+                      borderWidth: 3,
+                    }}
+                    source={{ uri: item }}
+                  />
                 </TouchableOpacity>
               );
             }}
           />
-          {/* <View>
-          {currentAnswers.map((ans, index) => (
-            <Checkbox.Item key={index} label={ans} status="checked" onPress={() => {
-              console.log(current.correctAnswer, ans)
-              if(current.correctAnswer == (index + 1)){
-                this.setState({currentIndexOfQuestion: currentIndexOfQuestion+1});
-              } 
-            }}/>
-          ))}
           
-        </View> */}
         </ImageBackground>
       </View>
     );
